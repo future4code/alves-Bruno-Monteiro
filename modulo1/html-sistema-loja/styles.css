@@ -1,0 +1,47 @@
+header {
+    background-color: rgba(43, 83, 226, 0.39);
+    margin: 20px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 20px;
+    border-style: dotted;
+    border-radius: 8px;
+    color: azure;
+}
+
+nav {
+    background-color: rgb(0, 132, 255);
+    font-size: 20px;
+}
+
+a {
+    color: rgb(177, 207, 211);
+}
+
+p {
+    background-color: rgb(0, 94, 255);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.texto-footer {
+    background-color: rgb(112, 128, 216);
+}
+header h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+body{
+    background-color: rgb(255, 255, 255);
+}
+
+footer{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+main{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(11, 4, 39);
+}
+
+li{
+    color: blue;
+}
