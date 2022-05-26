@@ -107,7 +107,11 @@ table {
     width: 60%;
 }
 td{
-    text-align: center;
+    text-align: center; 
+}
+td img{
+    width: 45px;
+    
     
 }
 
