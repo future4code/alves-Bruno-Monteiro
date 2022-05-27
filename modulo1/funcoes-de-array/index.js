@@ -142,27 +142,3 @@
 //     return `Compre ${item.nome} por ${item.preco}`
 // })
 // console.log(arrayProdutos5 , arrayProdutos6)
-
-
-// const pokemons = [
-//     { nome: "Bulbasaur", tipo: "grama" },
-//     { nome: "Bellsprout", tipo: "grama" },
-//     { nome: "Charmander", tipo: "fogo" },
-//     { nome: "Vulpix", tipo: "fogo" },
-//     { nome: "Squirtle", tipo: "água" },
-//     { nome: "Psyduck", tipo: "água" },
-//     ] 
-// const nomeDosPokemons = pokemons.filter((pokemon) => {
-//    return pokemon.length >= 5
-//     })  
-//  console.log("nomeDospokemons")     
-
-
-
-const isPrime = (num) => {
-    for (let i = 2; i < num; i++)
-    if (num % i === 0) {
-    return false;
-    return num > 1
-    }
-    }
