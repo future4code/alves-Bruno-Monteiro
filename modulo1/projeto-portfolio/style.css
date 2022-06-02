@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family:'Tiro Devanagari Hindi', serif;
+    color: #1e1e2a;
+}
+/* HEADER */
+.header-container {
+    /* height: 100vh; */
+    width: 100vw;
+    background-color: rgb(131, 178, 226);
+    background-image: none;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    padding: 0 112px;
+    position: relative;
+}
+
+h1{
+    font-size: 50px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-top: 0px;
+}
+
+h2{
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+h3 {
+    margin-top: 0px;
+}
+
+.social-media{
+    margin-top: 1rem;
+    display: flex;
+}
+
+.social-media a {
+    text-decoration: none;
+    color:#1e1e2a;
+    padding:1rem 4rem;
+    border: 1px solid #1e1e2a;
+    border-radius: 10px;
+    margin-right: 10px;
+    min-width: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .5s ease-in-out;
+}
+a:hover{
+    background-color: rgb(221, 229, 238);
+}
+/* MENU */
+.checkbox-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+nav a {
+    display: inline-block;
+    padding: 10px;
+}
+
+.menu-itens a{
+    margin: 10px;
+    color: #1e1e2a;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    font-size: 15px;
+    border-radius: 20px;
+    margin-right: 15px;
+    border: 1px solid #1e1e2a;
+}
+.footer{
+    width: 100%;
+    height: 100px;
+    background-color: rgb(131, 178, 226);
+        font-size: 15px;
+    display: flex; 
+    align-items: center;
+    color: #1e1e2a;
+}
+
+.container {
+    background-color: rgb(131, 178, 226);
+}
+
+form {
+    padding: 20px;
+}
+main{
+
+    background-color: rgb(131, 178, 226);
+    padding: 20px;
+}
+
+ul {
+    margin-top: 0px;
+}
+button{
+    margin: 10px;
+    color: #1e1e2a;
+    text-decoration: none;
+    text-transform: none;
+    /* letter-spacing:  */
+    font-size: 15px;
+    border-radius: 20px;
+    margin-right: 15px;
+    border: 1px solid #1e1e2a;
+}
+
+body{
+    background-color: rgb(131, 178, 226);
+}
+li a {
+    margin: 10px;
+    color: #1e1e2a;
+    text-decoration: none;
+    text-transform: none;
+    /* letter-spacing:  */
+    font-size: 15px;
+    border-radius: 20px;
+    margin-right: 15px;
+    border: 1px solid #1e1e2a;
+    padding: 3px;
+}
+
+li {
+    margin-bottom: 10px;
+}
