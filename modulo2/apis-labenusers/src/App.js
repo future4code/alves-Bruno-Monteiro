@@ -1,6 +1,18 @@
 import React from "react";
 import axios from "axios";
 import ListScreen from "./components/ListScreen";
+import styled from "styled-components"
+
+const FormContainer = styled.div`
+padding: 30px;
+padding-top: 2%;
+border: 2px solid black;
+margin:5% auto;
+width: 30%;
+display:block;
+flex-direction: column;
+
+`
 
 
 export default class App extends React.Component {
@@ -52,7 +64,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <main>
+      <FormContainer>
         <button onClick={this.changeScreen}>Trocar de Tela</button>
         {this.state.listScreen ? (
           <ListScreen/>
@@ -71,7 +83,7 @@ export default class App extends React.Component {
              <button onClick={this.createUser}>Criar Usuario</button>
           </div>
         )}
-      </main>
+      </FormContainer>
     );
   }
 }
