@@ -1,16 +1,18 @@
-import React from "react"
+import React, { Component } from 'react'
+import GetPlaylist from './components/GetPlaylist'
+import CreatPlaylist from './components/CreatePlaylist'
+import styled from 'styled-components'
 
-export default class App extends React.Component {
-state = {
-  criarPlaylist: "",
-  VisualizarPlaylst: ""
-}
 
-  render(){
+export default class App extends Component {
+  render() {
     return (
-      <div>
-       Labefy in progress
-      </div>
-  );
-   }
+      <TelaPrincipal>
+        <Container>
+          <CreatPlaylist />
+          <GetPlaylist/>
+        </Container>
+      </TelaPrincipal>
+    )
+  }
 }
