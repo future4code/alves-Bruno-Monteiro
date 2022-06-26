@@ -3,6 +3,41 @@ import axios from 'axios'
 import styled from 'styled-components'
 
 
+const InsertText = styled.label`
+    font-size: 18px;
+`
+
+const MainContainer = styled.div`
+    text-align: center;
+    
+`
+const TextField = styled.input`
+    border-radius: 20px;
+    text-align: center;
+    height: 25px;
+    font-size: 20px;
+    margin-right: 10px;
+    &:focus {
+        outline: none;
+        box-shadow: 2px 2px 2px #1DB954;
+    }
+`
+const Button = styled.button`
+    margin: 10px;
+    width: 100px;
+    height: 30px;
+    border-radius: 20px;
+    background-color: #1DB954;
+    border-color: #1DB954;
+    color: black;
+    :hover{
+        top:-4px;
+        box-shadow:0 4px 3px #999;
+        background-color: white;
+        color: #1DB954;   
+  }
+`
+
 export default class GetPlaylist extends Component {
   state = {
       playlist: [],
@@ -119,8 +154,8 @@ export default class GetPlaylist extends Component {
       const listaMusicas = this.state.playlist.map((playlist) => {
           return <div key={playlist.id}>
               <h3>{playlist.name}</h3>
-              <button onClick={() => { this.deletePlaylist(playlist.id) }}>Delete</button>
-              <button onClick={() => { this.getPlaylistTracks(playlist.id, playlist.name) }}>View Songs</button>
+              <Button onClick={() => { this.deletePlaylist(playlist.id) }}>Delete</Button>
+              <Button onClick={() => { this.getPlaylistTracks(playlist.id, playlist.name) }}>View Songs</Button>
           </div>
       })
 
@@ -129,43 +164,43 @@ export default class GetPlaylist extends Component {
               <h3>{this.state.title}</h3>
               <p><strong>Song: </strong>{musicas.name}</p>
               <p><strong>Artist: </strong>{musicas.artist}</p>
-              <a href={musicas.url} target="_blank"><button>Play</button></a>
-              <button onClick={() => { this.removeTrackFromPlaylist(musicas.id) }}>Delete</button>
+              <a href={musicas.url} target="_blank"><Button>Play</Button></a>
+              <Button onClick={() => { this.removeTrackFromPlaylist(musicas.id) }}>Delete</Button>
           </div>
       })
 
       let titulo = this.state.title
-      let testeLogico
+      let AddLogic
       if (this.state.telas === 1) {
-          testeLogico = <div>
-              <button onClick={() => this.getAllPlaylists()}>Search</button>
+          AddLogic = <div>
+              <Button onClick={() => this.getAllPlaylists()}>Search</Button>
               {listaMusicas}
           </div>
       } else if (this.state.telas === 2) {
-          testeLogico = <div>
+          AddLogic = <div>
               {musica}
-              <button onClick={() => this.telaLista()}>Back</button>
-              <button onClick={() => this.telaAdicionarMusicas()}>Add Song</button>
+              <Button onClick={() => this.telaLista()}>Back</Button>
+              <Button onClick={() => this.telaAdicionarMusicas()}>Add Song</Button>
           </div>
       } else {
-          testeLogico = <div>
+          AddLogic = <div>
               <h3>{titulo}</h3>
               <p>Add a song to the playlist {titulo} by filling out the details below</p>
-              <label>Name: </label>
-              <input value={this.state.nome} onChange={this.campoNome} placeholder='Name' />
-              <label>Artist: </label>
-              <input value={this.state.artista} onChange={this.campoArtista} placeholder='Artist' />
-              <label>URL: </label>
-              <input value={this.state.url} onChange={this.campoURL} placeholder='URL' />
-              <button onClick={() => { this.addTrackToPlaylist(this.state.idPlaylist) }}>Add</button>
-              <button onClick={() => this.telaLista()}>Back</button>
+              <InsertText>Name: </InsertText>
+              <TextField value={this.state.nome} onChange={this.campoNome} placeholder='' />
+              <InsertText>Artist: </InsertText>
+              <TextField value={this.state.artista} onChange={this.campoArtista} placeholder='' />
+              <InsertText>URL: </InsertText>
+              <TextField value={this.state.url} onChange={this.campoURL} placeholder='' />
+              <Button onClick={() => { this.addTrackToPlaylist(this.state.idPlaylist) }}>Add</Button>
+              <Button onClick={() => this.telaLista()}>Back</Button>
           </div>
       }
 
       return (
-          <div>
-              {testeLogico}
-          </div>
+          <MainContainer>
+              {AddLogic}
+          </MainContainer>
       )
   }
 }
