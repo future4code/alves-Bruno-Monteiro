@@ -14,7 +14,7 @@ Esse repositório vai acompanhar vocês até o final do curso, para mantermos a 
 │   ├── nome-da-aula
 │   ├── nome-da-aula
 │   ├── nome-da-aula
-│   └── nome-do-projeto
+│   └── Projeto Labefy
 |
 ├── modulo3
 │   ├── nome-da-aula
