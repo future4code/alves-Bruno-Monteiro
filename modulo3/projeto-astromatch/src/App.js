@@ -1,13 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
 import { ChakraProvider } from '@chakra-ui/react'
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Icon } from '@chakra-ui/react'
 import { FaListUl } from 'react-icons/fa'
 import { IoPeople } from 'react-icons/io5'
 import ProfileScreen from "./components/ProfileScreen";
-
+import ListScreen from "./components/ListScreen";
 function App() {
 
   const [screenProfile, setScreenProfile] = useState(true)
@@ -22,9 +20,7 @@ function App() {
       <header>
         {screenProfile ? <Icon onClick={changeIcon} as={FaListUl} /> : <Icon onClick={changeIcon} as={IoPeople} />}
       </header>
-      <ProfileScreen>
-
-      </ProfileScreen>
+      {screenProfile ? <ProfileScreen></ProfileScreen> : <ListScreen> </ListScreen>}
     </ChakraProvider>
   );
 }

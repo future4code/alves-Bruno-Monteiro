@@ -1,22 +1,48 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Icon } from '@chakra-ui/react'
-import { FaListUl } from 'react-icons/fa'
-import { IoPeople } from 'react-icons/io5'
+import { Flex, Avatar, Box, Text } from '@chakra-ui/react'
 
 function ListScreen(props) {
 
-  const [screenProfile, setScreenProfile] = useState(true)
+    const [profiles, setProfiles] = useState([])
 
-  const changeIcon = () => {
-    setScreenProfile(!screenProfile)
-  };
+    const getMatches = () => {
+        axios
+            .get("https://us-central1-missao-newton.cloudfunctions.net/astroMatch/bruno-monteiro/matches")
+            .then(res => {
+                console.log(res.data.matches);
+                setProfiles(res.data.matches);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 
-  return (
 
-    <div>
-    </div>
-  );
+    useEffect(() => {
+        getMatches()
+    }, [])
+
+
+    const matchesList = profiles.map(profile => {
+        return (
+            <Flex>
+                <Avatar src={profile.photo} />
+                <Box ml='3'>
+                    <Text fontWeight='bold'>
+                        {profile.name}
+                    </Text>
+                </Box>
+            </Flex>
+        );
+    });
+
+
+    return (
+        <div>
+            {matchesList}
+        </div>
+    );
 }
 
 export default ListScreen;
