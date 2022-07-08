@@ -63,7 +63,7 @@ const BoxProfile = styled.div`
   box-shadow: 0 2px 10px 0 rgb(136,136,136);
   overflow: hidden;
   transition: all 1.5s ease 1s;
-  height: 38em;
+  height: 26em;
   display: flex;
   align-items: center;
   animation: ${props => {
@@ -191,8 +191,8 @@ function ProfileScreen(props) {
                 <BoxBlur photo={profile.photo}></BoxBlur>
                 <Image zIndex={1} w="100%" display="block" src={profile.photo} alt={profile.name} />
                 <BoxContent>
-                    <Heading as='h3' size='lg'>{profile.name}, {profile.age}</Heading>
-                    <Text fontSize='lg' noOfLines={3}>{profile.bio}</Text>
+                    <Heading as='h3' size='md'>{profile.name}, {profile.age}</Heading>
+                    <Text fontSize='md' noOfLines={3}>{profile.bio}</Text>
                 </BoxContent>
             </BoxProfile>
             <BoxButtons>

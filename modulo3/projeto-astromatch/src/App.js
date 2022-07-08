@@ -39,8 +39,8 @@ const Header = styled.div`
 `
 
 const MainContainer = styled.div`
-    width: 500px;
-    height: 800px;
+    width: 400px;
+    height: 600px;
     position: fixed;
     top: 50%;
     left: 50%;
