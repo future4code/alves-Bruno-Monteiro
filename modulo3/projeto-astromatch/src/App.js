@@ -1,7 +1,7 @@
 import './App.css';
 import { ChakraProvider } from '@chakra-ui/react'
 import React, { useEffect, useState } from "react";
-import { Icon, Heading, Image } from '@chakra-ui/react'
+import { IconButton, Heading, Image } from '@chakra-ui/react'
 import { BiMessageDetail } from 'react-icons/bi'
 import { IoPeople } from 'react-icons/io5'
 import ProfileScreen from "./components/ProfileScreen";
@@ -69,7 +69,7 @@ function App() {
         <Header>
           <Image src={logoImg} w={30}></Image>
            <Image src={astroMatchLogo} w={200}></Image>
-          {screenProfile ? <Icon color="#F26666" w={8} h={8} onClick={changeIcon} as={BiMessageDetail} /> : <Icon color="#F26666" w={8} h={8} onClick={changeIcon} as={IoPeople} />}
+          {screenProfile ? <IconButton cursor="pointer" aria-label='profile screen' color="#F26666"  size='md' onClick={changeIcon} as={BiMessageDetail} /> : <IconButton aria-label='match screen' color="#F26666" size='md' cursor="pointer" onClick={changeIcon} as={IoPeople} />}
         </Header>
         <BoxMainContent>
           {screenProfile ? <ProfileScreen></ProfileScreen> : <ListScreen> </ListScreen>}

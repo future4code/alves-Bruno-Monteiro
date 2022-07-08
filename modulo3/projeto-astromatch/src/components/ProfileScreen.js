@@ -199,8 +199,8 @@ function ProfileScreen(props) {
                 {viewedAll ? <Button colorScheme="green" onClick={clearMatches}>
                     Reset Profiles
                 </Button> : <>
-                <IconButton isRound="true" icon={<ImCross />} onClick={() => changeProfile(false)} colorScheme='purple' size='lg'></IconButton>
-                <IconButton isRound="true" icon={<ImHeart />} onClick={() => changeProfile(true)} colorScheme='green' size='lg'></IconButton>
+                <IconButton aria-label='dislike' isRound="true" icon={<ImCross />} onClick={() => changeProfile(false)} colorScheme='purple' size='lg'></IconButton>
+                <IconButton aria-label='like' isRound="true" icon={<ImHeart />} onClick={() => changeProfile(true)} colorScheme='green' size='lg'></IconButton>
                 </> }
                 
 
