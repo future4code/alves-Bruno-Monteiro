@@ -28,9 +28,9 @@ function ListScreen(props) {
         return (
             <Flex p={3}>
                 <Avatar size='lg' src={profile.photo} />
-                    <Text p={4} fontWeight='bold'>
-                        {profile.name}
-                    </Text>
+                <Text p={4} fontWeight='bold'>
+                    {profile.name}
+                </Text>
             </Flex>
         );
     });

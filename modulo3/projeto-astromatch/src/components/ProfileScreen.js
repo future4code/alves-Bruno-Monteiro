@@ -69,7 +69,7 @@ const BoxProfile = styled.div`
   animation: ${props => {
         if (props.slideRight) {
             return css`${slideRightAnimation} 0.5s`
-        } else if (props.slideLeft){
+        } else if (props.slideLeft) {
             return css`${slideLeftAnimation} 0.5s`
         }
     }};
@@ -99,7 +99,7 @@ function ProfileScreen(props) {
             "choice": like
         }
 
-        if(like){
+        if (like) {
             setSlideRight(true)
         } else {
             setSlideLeft(true)
@@ -187,22 +187,22 @@ function ProfileScreen(props) {
     return (
 
         <MainView>
-                <BoxProfile slideRight={slideRight} slideLeft={slideLeft}>
-                    <BoxBlur photo={profile.photo}></BoxBlur>
-                    <Image zIndex={1} w="100%" display="block" src={profile.photo} alt={profile.name} />
-                    <BoxContent>
-                        <Heading as='h3' size='lg'>{profile.name}, {profile.age}</Heading>
-                        <Text fontSize='lg' noOfLines={3}>{profile.bio}</Text>
-                    </BoxContent>
-                </BoxProfile>
+            <BoxProfile slideRight={slideRight} slideLeft={slideLeft}>
+                <BoxBlur photo={profile.photo}></BoxBlur>
+                <Image zIndex={1} w="100%" display="block" src={profile.photo} alt={profile.name} />
+                <BoxContent>
+                    <Heading as='h3' size='lg'>{profile.name}, {profile.age}</Heading>
+                    <Text fontSize='lg' noOfLines={3}>{profile.bio}</Text>
+                </BoxContent>
+            </BoxProfile>
             <BoxButtons>
                 {viewedAll ? <Button colorScheme="green" onClick={clearMatches}>
                     Reset Profiles
                 </Button> : <>
-                <IconButton aria-label='dislike' isRound="true" icon={<ImCross />} onClick={() => changeProfile(false)} colorScheme='purple' size='lg'></IconButton>
-                <IconButton aria-label='like' isRound="true" icon={<ImHeart />} onClick={() => changeProfile(true)} colorScheme='green' size='lg'></IconButton>
-                </> }
-                
+                    <IconButton aria-label='dislike' isRound="true" icon={<ImCross />} onClick={() => changeProfile(false)} colorScheme='purple' size='lg'></IconButton>
+                    <IconButton aria-label='like' isRound="true" icon={<ImHeart />} onClick={() => changeProfile(true)} colorScheme='green' size='lg'></IconButton>
+                </>}
+
 
             </BoxButtons>
 

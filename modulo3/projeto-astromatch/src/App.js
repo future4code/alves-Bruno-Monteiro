@@ -68,8 +68,8 @@ function App() {
 
         <Header>
           <Image src={logoImg} w={30}></Image>
-           <Image src={astroMatchLogo} w={200}></Image>
-          {screenProfile ? <IconButton cursor="pointer" aria-label='profile screen' color="#F26666"  size='md' onClick={changeIcon} as={BiMessageDetail} /> : <IconButton aria-label='match screen' color="#F26666" size='md' cursor="pointer" onClick={changeIcon} as={IoPeople} />}
+          <Image src={astroMatchLogo} w={200}></Image>
+          {screenProfile ? <IconButton cursor="pointer" aria-label='profile screen' color="#F26666" size='md' onClick={changeIcon} as={BiMessageDetail} /> : <IconButton aria-label='match screen' color="#F26666" size='md' cursor="pointer" onClick={changeIcon} as={IoPeople} />}
         </Header>
         <BoxMainContent>
           {screenProfile ? <ProfileScreen></ProfileScreen> : <ListScreen> </ListScreen>}
