@@ -26,13 +26,11 @@ function ListScreen(props) {
 
     const matchesList = profiles.map(profile => {
         return (
-            <Flex>
-                <Avatar src={profile.photo} />
-                <Box ml='3'>
-                    <Text fontWeight='bold'>
+            <Flex p={3}>
+                <Avatar size='lg' src={profile.photo} />
+                    <Text p={4} fontWeight='bold'>
                         {profile.name}
                     </Text>
-                </Box>
             </Flex>
         );
     });

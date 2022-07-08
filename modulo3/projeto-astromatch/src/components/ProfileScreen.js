@@ -4,7 +4,7 @@ import { ImHeart, ImCross } from 'react-icons/im'
 import { IconButton, Image, Icon, useToast, Button, Box, Text, Heading } from '@chakra-ui/react';
 import styled, { keyframes, css } from "styled-components"
 
-const slideRigthAnimation = keyframes`
+const slideRightAnimation = keyframes`
   from {
     opacity: 1;
 	  transform: translate(0) rotate(0);
@@ -62,14 +62,14 @@ const BoxProfile = styled.div`
   border-radius: 5px;
   box-shadow: 0 2px 10px 0 rgb(136,136,136);
   overflow: hidden;
-  transition: all 0.5s ease 0s;
+  transition: all 1.5s ease 1s;
   height: 38em;
   display: flex;
   align-items: center;
   animation: ${props => {
-        if (props.slideRigth) {
-            return css`${slideRigthAnimation} 0.5s`
-        } else if (props.slideLeft) {
+        if (props.slideRight) {
+            return css`${slideRightAnimation} 0.5s`
+        } else if (props.slideLeft){
             return css`${slideLeftAnimation} 0.5s`
         }
     }};
@@ -90,11 +90,19 @@ function ProfileScreen(props) {
     const [toastMessage, setToastMessage] = useState(undefined);
     const toast = useToast();
     const [viewedAll, setViewedAll] = useState(false);
+    const [slideRight, setSlideRight] = useState(false);
+    const [slideLeft, setSlideLeft] = useState(false);
 
     const changeProfile = (like) => {
         const body = {
             "id": profile.id,
             "choice": like
+        }
+
+        if(like){
+            setSlideRight(true)
+        } else {
+            setSlideLeft(true)
         }
 
         axios
@@ -109,7 +117,9 @@ function ProfileScreen(props) {
                         type: "success"
                     });
                 }
-                getProfileToChoose();
+                setSlideRight(false)
+                setSlideLeft(false)
+                getProfileToChoose()
             })
             .catch(err => {
                 console.log(err);
@@ -177,12 +187,12 @@ function ProfileScreen(props) {
     return (
 
         <MainView>
-                <BoxProfile>
+                <BoxProfile slideRight={slideRight} slideLeft={slideLeft}>
                     <BoxBlur photo={profile.photo}></BoxBlur>
                     <Image zIndex={1} w="100%" display="block" src={profile.photo} alt={profile.name} />
                     <BoxContent>
-                        <Heading as='h4' size='md'>{profile.name}, {profile.age}</Heading>
-                        <Text fontSize='md' noOfLines={3}>{profile.bio}</Text>
+                        <Heading as='h3' size='lg'>{profile.name}, {profile.age}</Heading>
+                        <Text fontSize='lg' noOfLines={3}>{profile.bio}</Text>
                     </BoxContent>
                 </BoxProfile>
             <BoxButtons>

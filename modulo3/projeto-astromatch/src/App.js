@@ -2,12 +2,13 @@ import './App.css';
 import { ChakraProvider } from '@chakra-ui/react'
 import React, { useEffect, useState } from "react";
 import { Icon, Heading, Image } from '@chakra-ui/react'
-import { FaListUl } from 'react-icons/fa'
+import { BiMessageDetail } from 'react-icons/bi'
 import { IoPeople } from 'react-icons/io5'
 import ProfileScreen from "./components/ProfileScreen";
 import ListScreen from "./components/ListScreen";
 import styled from "styled-components"
-import logoImg from "./img/logo.png"
+import logoImg from "./img/astrologo.png"
+import astroMatchLogo from "./img/AstroMatch3.png"
 
 
 
@@ -48,6 +49,7 @@ const MainContainer = styled.div`
     border-radius: 7px;
     background: #F2F2F2;
     box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 5px;
+   
 `
 
 
@@ -65,9 +67,9 @@ function App() {
       <MainContainer>
 
         <Header>
-          <Image src={logoImg} boxSize='50px'></Image>
-          <Heading color="#F26666" as='h3' size='lg'>AstroMatch</Heading>
-          {screenProfile ? <Icon color="#F26666" w={8} h={8} onClick={changeIcon} as={FaListUl} /> : <Icon color="#F26666" w={8} h={8} onClick={changeIcon} as={IoPeople} />}
+          <Image src={logoImg} w={30}></Image>
+           <Image src={astroMatchLogo} w={200}></Image>
+          {screenProfile ? <Icon color="#F26666" w={8} h={8} onClick={changeIcon} as={BiMessageDetail} /> : <Icon color="#F26666" w={8} h={8} onClick={changeIcon} as={IoPeople} />}
         </Header>
         <BoxMainContent>
           {screenProfile ? <ProfileScreen></ProfileScreen> : <ListScreen> </ListScreen>}
