@@ -1,11 +1,56 @@
 import './App.css';
 import { ChakraProvider } from '@chakra-ui/react'
 import React, { useEffect, useState } from "react";
-import { Icon } from '@chakra-ui/react'
+import { Icon, Heading, Image } from '@chakra-ui/react'
 import { FaListUl } from 'react-icons/fa'
 import { IoPeople } from 'react-icons/io5'
 import ProfileScreen from "./components/ProfileScreen";
 import ListScreen from "./components/ListScreen";
+import styled from "styled-components"
+import logoImg from "./img/logo.png"
+
+
+
+const BoxMainContent = styled.div`
+  display: flex;
+  padding: 20px 20px 0px;
+  flex-direction: column;
+  justify-content: flex-end;
+  
+`
+
+const Header = styled.div`
+    height: 55px;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    padding: 0px 10px;
+    flex-shrink: 0;
+    background: #F2F2F2;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 5px 7px 0px 0px;
+    border-radius: 5px 7px 0px 0px; 
+    
+`
+
+const MainContainer = styled.div`
+    width: 500px;
+    height: 800px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 7px;
+    background: #F2F2F2;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 5px;
+`
+
+
 function App() {
 
   const [screenProfile, setScreenProfile] = useState(true)
@@ -17,10 +62,17 @@ function App() {
   return (
 
     <ChakraProvider>
-      <header>
-        {screenProfile ? <Icon onClick={changeIcon} as={FaListUl} /> : <Icon onClick={changeIcon} as={IoPeople} />}
-      </header>
-      {screenProfile ? <ProfileScreen></ProfileScreen> : <ListScreen> </ListScreen>}
+      <MainContainer>
+
+        <Header>
+          <Image src={logoImg} boxSize='50px'></Image>
+          <Heading color="#F26666" as='h3' size='lg'>AstroMatch</Heading>
+          {screenProfile ? <Icon color="#F26666" w={8} h={8} onClick={changeIcon} as={FaListUl} /> : <Icon color="#F26666" w={8} h={8} onClick={changeIcon} as={IoPeople} />}
+        </Header>
+        <BoxMainContent>
+          {screenProfile ? <ProfileScreen></ProfileScreen> : <ListScreen> </ListScreen>}
+        </BoxMainContent>
+      </MainContainer>
     </ChakraProvider>
   );
 }
