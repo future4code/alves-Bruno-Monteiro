@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 
 const ContainerBotoesForm = styled.div`
@@ -29,46 +31,24 @@ const Input = styled.input`
 
 
 const ApplicationFormPage = (props) => {
-      const [nome, setNome] = useState("")
-      const [idade, setIdade] = useState("")
-      const [texto, setTexto] = useState("")
-      const [profissao, setProfissao] = useState("")
-      const [pais, setPais] = useState("")
+    const [nome, setNome] = useState("")
+    const [idade, setIdade] = useState("")
+    const [texto, setTexto] = useState("")
+    const [profissao, setProfissao] = useState("")
+    const [pais, setPais] = useState("")
 
-    //   useEffect(() => {
+    const navigate = useNavigate()
+    const pathParams = useParams()
 
-    //     pegaPokemon(props.pokeName);
-    //   }, [props.pokeName])
-
-    //   const pegaPokemon = pokeName => {
-    //     axios
-    //       .get(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
-    //       .then(response => {
-
-    //         setPokemon(response.data);
-    //       })
-    //       .catch(err => {
-    //         console.log(err);
-    //       });
-    //   }
-
-    // const listaViagens = props.viagens.map((viagem, index) => {
-    //     return (
-    //         <CardViagem key={viagem.id}>
-    //             <p>Nome: {viagem.name}</p>
-    //             <p>Descrição: {viagem.description}</p>
-    //             <p>Planeta: {viagem.planet}</p>
-    //             <p>Duração: {viagem.durationInDays} dias</p>
-    //             <p>Data: {viagem.date}</p>
-    //         </CardViagem>
-    //     )
-    // })
+    const goToPreviousPage = () => {
+        navigate(-1)
+    }
 
     const onChangeNome = (event) => {
         setNome(event.target.value);
     }
 
-    const onChangeIdade= (event) => {
+    const onChangeIdade = (event) => {
         setIdade(event.target.value);
     }
 
@@ -80,8 +60,28 @@ const ApplicationFormPage = (props) => {
         setProfissao(event.target.value);
     }
 
+    const onChangePais = (event) => {
+        setPais(event.target.value);
+    }
+
     const enviarInscricao = () => {
-        
+        const body = {
+            "name": nome,
+            "age": idade,
+            "applicationText": texto,
+            "profession": profissao,
+            "country": pais
+        }
+        axios
+            .post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/brunomonteiro/trips/${pathParams.tripId}/apply`, body)
+            .then(response => {
+                alert("Candidatura enviada com sucesso!")
+                goToPreviousPage()
+            })
+            .catch(err => {
+                alert("Something is wrong, check your data!");
+                console.log(err);
+            });
     }
 
 
@@ -93,15 +93,15 @@ const ApplicationFormPage = (props) => {
                 <Input type="text" onChange={onChangeNome} placeholder="Nome" value={nome}
                     name={"name"} required></Input>
                 <Input type="text" onChange={onChangeIdade} placeholder="Idade" value={idade}
-                      name={"idade"} required></Input>
+                    name={"idade"} required></Input>
                 <Input type="text" onChange={onChangeTexto} placeholder="Por que você gostaria de se candidatar a essa viagem?" value={texto}
-                      name={"texto"} required></Input>
+                    name={"texto"} required></Input>
                 <Input type="text" onChange={onChangeProfissao} placeholder="Profissão" value={profissao}
-                      name={"profissao"} required></Input>
-                <select placeholder="País" name="country" required="">
+                    name={"profissao"} required></Input>
+                <select placeholder="País" name="country" required="" onChange={onChangePais}>
                     <option value="" disabled="">Escolha um País</option>
                     <option value="África do Sul">África do Sul</option>
-                    <option value="Albânia">Albânia</option>
+                    <option value="Albânia">Albânia</option>Z
                     <option value="Alemanha">Alemanha</option>
                     <option value="Andorra">Andorra</option>
                     <option value="Angola">Angola</option>
@@ -276,7 +276,7 @@ const ApplicationFormPage = (props) => {
                     <option value="Zimbábue">Zimbábue</option>
                 </select>
                 <ContainerBotoesForm>
-                    <button>Voltar</button>
+                    <button onClick={goToPreviousPage}>Voltar</button>
                     <button onClick={enviarInscricao}>Enviar</button>
                 </ContainerBotoesForm>
             </Form>

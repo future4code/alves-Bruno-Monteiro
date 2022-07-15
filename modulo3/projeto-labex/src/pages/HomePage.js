@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const HomePage = (props) => {
+export const HomePage = (props) => {
+    const navigate = useNavigate()
+
+    const goToTripsPage = () => {
+        navigate("/trips")
+    }
+
+    const goToLoginPage = () => {
+        navigate("/login")
+    }
 //   const [pokemon, setPokemon] = useState({})
 
 //   useEffect(() => {
@@ -23,11 +33,10 @@ const HomePage = (props) => {
 
   return (
     <div>
-        <button>Ver Viagens</button>
-        <button>Login</button>
+        <button onClick={goToTripsPage}>Ver Viagens</button>
+        <button onClick={goToLoginPage}>Login</button>
     </div>
   );
 }
-
 
 export default HomePage;

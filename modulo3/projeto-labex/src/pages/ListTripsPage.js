@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 
 const CardViagem = styled.div`
@@ -18,26 +19,39 @@ const ContainerViagens = styled.div`
 
 
 const ListTripsPage = (props) => {
-    //   const [pokemon, setPokemon] = useState({})
 
-    //   useEffect(() => {
+    const [viagens, setViagens] = useState([])
+    const navigate = useNavigate()
 
-    //     pegaPokemon(props.pokeName);
-    //   }, [props.pokeName])
+    const goToApplicationPage = () => {
+        navigate("/application")
+    }
 
-    //   const pegaPokemon = pokeName => {
-    //     axios
-    //       .get(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
-    //       .then(response => {
+    const goToPreviousPage = () => {
+        navigate(-1)
+    }
 
-    //         setPokemon(response.data);
-    //       })
-    //       .catch(err => {
-    //         console.log(err);
-    //       });
-    //   }
 
-    const listaViagens = props.viagens.map((viagem, index) => {
+
+  const pegaViagens = () => {
+    axios
+      .get(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/brunomonteiro/trips`)
+      .then(response => {
+
+        setViagens(response.data.trips);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+
+    pegaViagens();
+  }, [])
+
+
+    const listaViagens = viagens.map((viagem, index) => {
         return (
             <CardViagem key={viagem.id}>
                 <p>Nome: {viagem.name}</p>
@@ -45,7 +59,7 @@ const ListTripsPage = (props) => {
                 <p>Planeta: {viagem.planet}</p>
                 <p>Duração: {viagem.durationInDays} dias</p>
                 <p>Data: {viagem.date}</p>
-                <button>Inscrever-se</button>
+                <button onClick={goToApplicationPage}>Inscrever-se</button>
             </CardViagem>
         )
     })
@@ -54,7 +68,7 @@ const ListTripsPage = (props) => {
     return (
         <div>
             <h3>Lista de Viagens</h3>
-            <button>Voltar</button>
+            <button onClick={goToPreviousPage}>Voltar</button>
             <ContainerViagens>
                 {listaViagens}
             </ContainerViagens>
