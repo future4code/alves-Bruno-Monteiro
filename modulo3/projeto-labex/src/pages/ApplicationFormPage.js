@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -11,18 +11,13 @@ const ContainerBotoesForm = styled.div`
     width: 100%;
 `
 
-const Form = styled.form`
+const Form = styled.div`
     display: block;
     padding: 15px;
     width: 50%;
     margin: 20px;
 `
 
-const ContainerViagens = styled.div`
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-`
 const Input = styled.input`
     width: 75%;
     margin: 10px;
@@ -40,8 +35,8 @@ const ApplicationFormPage = (props) => {
     const navigate = useNavigate()
     const pathParams = useParams()
 
-    const goToPreviousPage = () => {
-        navigate(-1)
+    const goToTripsPage = () => {
+        navigate('/trips')
     }
 
     const onChangeNome = (event) => {
@@ -76,7 +71,7 @@ const ApplicationFormPage = (props) => {
             .post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/brunomonteiro/trips/${pathParams.tripId}/apply`, body)
             .then(response => {
                 alert("Candidatura enviada com sucesso!")
-                goToPreviousPage()
+                goToTripsPage()
             })
             .catch(err => {
                 alert("Something is wrong, check your data!");
@@ -276,7 +271,7 @@ const ApplicationFormPage = (props) => {
                     <option value="Zimbábue">Zimbábue</option>
                 </select>
                 <ContainerBotoesForm>
-                    <button onClick={goToPreviousPage}>Voltar</button>
+                    <button onClick={goToTripsPage}>Voltar</button>
                     <button onClick={enviarInscricao}>Enviar</button>
                 </ContainerBotoesForm>
             </Form>

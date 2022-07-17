@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useProtectedPage } from "../hooks/useProtectedPage";
 
 
 const CardViagem = styled.div`
@@ -20,6 +21,8 @@ const ContainerViagens = styled.div`
 
 const AdminHomePage = (props) => {
 
+  useProtectedPage()
+
   const [viagens, setViagens] = useState([])
   const navigate = useNavigate()
 
@@ -27,11 +30,16 @@ const AdminHomePage = (props) => {
     navigate("/create-trip")
   }
 
-  const goToPreviousPage = () => {
-    navigate(-1)
+  const goToTripDetailsPage = (id) => {
+    navigate(`/trip-details/${id}`)
+  }
+
+  const goToHomePage = () => {
+    navigate('/home')
   }
 
   const logout = () => {
+    window.localStorage.removeItem('token')
     navigate("/login")
   }
 
@@ -53,11 +61,22 @@ const AdminHomePage = (props) => {
   }, [])
 
   const removeViagem = (id) => {
+
+    const token = window.localStorage.getItem('token')
     console.log(id)
     axios
-      .delete(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/brunomonteiro/trips/$id`)
+      .delete(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/brunomonteiro/trips/${id}`, {
+        headers: {
+          auth: token
+        }
+      })
       .then(response => {
-        setViagens(response.data.trips);
+        const arrayViagens = [...viagens].filter((viagem, index) => {
+          if (viagem.id != id) {
+            return viagem
+          }
+        })
+        setViagens(arrayViagens)
       })
       .catch(err => {
         console.log(err);
@@ -69,7 +88,8 @@ const AdminHomePage = (props) => {
     return (
       <CardViagem key={viagem.id}>
         <p>Nome: {viagem.name}</p>
-        <button onClick={ () => { removeViagem(viagem.id) } }>Remover</button>
+        <button onClick={() => { goToTripDetailsPage(viagem.id)}}>Ver Detalhes</button>
+        <button onClick={() => { removeViagem(viagem.id) }}>Remover</button>
       </CardViagem>
     )
   })
@@ -78,7 +98,7 @@ const AdminHomePage = (props) => {
   return (
     <div>
       <h3>Lista de Viagens</h3>
-      <button onClick={goToPreviousPage}>Voltar</button>
+      <button onClick={goToHomePage}>Voltar</button>
       <button onClick={goToCreateTripPage}>Criar Viagem</button>
       <button onClick={logout}>Log Out</button>
       <ContainerViagens>

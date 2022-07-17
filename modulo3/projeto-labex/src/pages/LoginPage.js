@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-
 
 const ContainerBotoesForm = styled.div`
     display: flex;
@@ -24,14 +23,10 @@ const LoginPage = (props) => {
     const navigate = useNavigate()
     const pathParams = useParams()
 
-    const goToPreviousPage = () => {
-        navigate(-1)
-    }
 
-    const goToAdminPage = () => {
-      navigate("/admin")
+    const goToHomePage = () => {
+      navigate('/home')
   }
-
 
     const onChangeEmail = (event) => {
         setEmail(event.target.value);
@@ -41,22 +36,23 @@ const LoginPage = (props) => {
         setSenha(event.target.value);
     }
 
-    const logar = () => {
-        // const body = {
-        //     "email": email,
-        //     "senha": senha,
-        // }
-        // axios
-        //     .post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/brunomonteiro/trips/${pathParams.tripId}/apply`, body)
-        //     .then(response => {
-        //         alert("Candidatura enviada com sucesso!")
-        //         goToPreviousPage()
-        //     })
-        //     .catch(err => {
-        //         alert("Something is wrong, check your data!");
-        //         console.log(err);
-        //     });
-        goToAdminPage()
+    const login = () => {
+    
+      const body = {
+            "email": email,
+            "password": senha,
+        }
+
+        axios
+            .post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/brunomonteiro/login`, body)
+            .then(response => {
+               window.localStorage.setItem("token",response.data.token) 
+               navigate('/admin')
+            })
+            .catch(err => {
+                alert("Something is wrong, check your data!");
+                console.log(err);
+            });
     }
 
 
@@ -70,8 +66,8 @@ const LoginPage = (props) => {
                 <Input type="text" onChange={onChangeSenha} placeholder="Senha" value={senha}
                     name={"senha"} required></Input>
                 <ContainerBotoesForm>
-                    <button onClick={goToPreviousPage}>Voltar</button>
-                    <button onClick={logar}>Entrar</button>
+                    <button onClick={goToHomePage}>Voltar</button>
+                    <button onClick={login}>Entrar</button>
                 </ContainerBotoesForm>
             </div>
         </div>

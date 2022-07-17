@@ -23,8 +23,8 @@ const ListTripsPage = (props) => {
     const [viagens, setViagens] = useState([])
     const navigate = useNavigate()
 
-    const goToApplicationPage = () => {
-        navigate("/application")
+    const goToApplicationPage = (id) => {
+        navigate(`/application/${id}`)
     }
 
     const goToPreviousPage = () => {
@@ -37,7 +37,6 @@ const ListTripsPage = (props) => {
     axios
       .get(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/brunomonteiro/trips`)
       .then(response => {
-
         setViagens(response.data.trips);
       })
       .catch(err => {
@@ -59,7 +58,7 @@ const ListTripsPage = (props) => {
                 <p>Planeta: {viagem.planet}</p>
                 <p>Duração: {viagem.durationInDays} dias</p>
                 <p>Data: {viagem.date}</p>
-                <button onClick={goToApplicationPage}>Inscrever-se</button>
+                <button onClick={() => { goToApplicationPage(viagem.id)} }>Inscrever-se</button>
             </CardViagem>
         )
     })

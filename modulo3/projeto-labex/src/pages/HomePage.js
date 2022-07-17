@@ -1,6 +1,22 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+const HomeContainer = styled.div`
+    display: block;
+    margin: auto;
+    width: 40%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+`
+
+const ButtonContainer = styled.div`
+    display: flex;
+    margin: 20px;
+    margin-top: 50px;
+    justify-content: space-between;
+`
 
 export const HomePage = (props) => {
     const navigate = useNavigate()
@@ -12,31 +28,22 @@ export const HomePage = (props) => {
     const goToLoginPage = () => {
         navigate("/login")
     }
-//   const [pokemon, setPokemon] = useState({})
 
-//   useEffect(() => {
+    const goToAdminPage = () => {
+        navigate("/admin")
+    }
 
-//     pegaPokemon(props.pokeName);
-//   }, [props.pokeName])
+    const token = window.localStorage.getItem('token')
 
-//   const pegaPokemon = pokeName => {
-//     axios
-//       .get(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
-//       .then(response => {
-
-//         setPokemon(response.data);
-//       })
-//       .catch(err => {
-//         console.log(err);
-//       });
-//   }
-
-  return (
-    <div>
-        <button onClick={goToTripsPage}>Ver Viagens</button>
-        <button onClick={goToLoginPage}>Login</button>
-    </div>
-  );
+    return (
+        <HomeContainer>
+            <h2>Labex</h2>
+        <ButtonContainer>
+            <button onClick={goToTripsPage}>Ver Viagens</button>
+            {token ? (<button onClick={goToAdminPage}>Admin</button>) : (<button onClick={goToLoginPage}>Login</button>) }
+        </ButtonContainer>
+        </HomeContainer>
+    );
 }
 
 export default HomePage;
