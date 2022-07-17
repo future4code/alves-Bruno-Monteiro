@@ -35,7 +35,7 @@ const AdminHomePage = (props) => {
   }
 
   const goToHomePage = () => {
-    navigate('/home')
+    navigate('/')
   }
 
   const logout = () => {

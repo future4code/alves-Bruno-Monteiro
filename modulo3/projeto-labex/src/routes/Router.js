@@ -11,7 +11,7 @@ export const Router = ()=> {
     return(
         <BrowserRouter>
         <Routes>
-            <Route index path='home' element={<HomePage/>}/>
+            <Route index element={<HomePage/>}/>
             <Route path="trips" element={<ListTripsPage/>}/>
             <Route path="application/:tripId" element= {<ApplicationFormPage/>} />
             <Route path="login" element= {<LoginPage/>} />

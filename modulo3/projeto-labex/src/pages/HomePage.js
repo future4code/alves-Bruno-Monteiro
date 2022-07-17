@@ -7,8 +7,6 @@ const HomeContainer = styled.div`
     margin: auto;
     width: 40%;
     text-align: center;
-    justify-content: center;
-    align-items: center;
 `
 
 const ButtonContainer = styled.div`

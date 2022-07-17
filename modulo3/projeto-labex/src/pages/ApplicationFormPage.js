@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,11 @@ const Form = styled.div`
     margin: 20px;
 `
 
+const ContainerViagens = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+`
 const Input = styled.input`
     width: 75%;
     margin: 10px;
@@ -34,6 +39,10 @@ const ApplicationFormPage = (props) => {
 
     const navigate = useNavigate()
     const pathParams = useParams()
+
+    const goToPreviousPage = () => {
+        navigate(-1)
+    }
 
     const goToTripsPage = () => {
         navigate('/trips')

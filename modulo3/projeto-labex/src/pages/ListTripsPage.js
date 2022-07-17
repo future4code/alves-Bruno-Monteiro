@@ -27,8 +27,8 @@ const ListTripsPage = (props) => {
         navigate(`/application/${id}`)
     }
 
-    const goToPreviousPage = () => {
-        navigate(-1)
+    const goToHomePage = () => {
+        navigate("/")
     }
 
 
@@ -67,7 +67,7 @@ const ListTripsPage = (props) => {
     return (
         <div>
             <h3>Lista de Viagens</h3>
-            <button onClick={goToPreviousPage}>Voltar</button>
+            <button onClick={goToHomePage}>Voltar</button>
             <ContainerViagens>
                 {listaViagens}
             </ContainerViagens>
