@@ -1,6 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import FeedPage from "../pages/FeedPage/FeedPage"
 import LoginPage from "../pages/LoginPage/LoginPage"
 import PostPage from "../pages/PostPage/PostPage"
@@ -10,27 +9,15 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage"
 const Router = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route exact path="/login">
-          <LoginPage/>      
-        </Route>
-
-        <Route exact path="/signup">
-          <SignUpPage/>      
-        </Route>
-
-        <Route exact path="/feed">
-          <FeedPage/>      
-        </Route>
-
-        <Route exact path="/feed">
-          <PostPage/>      
-        </Route>
+      <Routes>
        
-        <Route >
-          <ErrorPage/>
-        </Route>
-      </Switch>
+      <Route index element={<FeedPage/>}/>
+            <Route path="post" element={<PostPage/>}/>
+            <Route path="signup" element= {<SignUpPage/>} />
+            <Route path="login" element= {<LoginPage/>} />
+            <Route path= "/" element = {<ErrorPage/>} />
+            
+      </Routes>
     </BrowserRouter>
   );
 };
