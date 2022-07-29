@@ -1,9 +1,26 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { baseURL } from '../../Constants/baseURL'
+import { baseURL } from "../../Constants/baseURL";
+import logo from "../../Assets/nav-logo.png";
+import {
+  ContainerSignup,
+  ContainerLogo,
+  ContainerInputs,
+  ContainerButtons,
+  ButtonContinue,
+  ButtonSignup,
+  Input,
+  Line,
+  Subhead,
+  Logo,
+  ButtonLogin,
+  Header,
+  TitleSignup,
+  DisclaimerText,
+  DisclaimerCheck
+} from "./styled";
 
 const SignUpPage = (props) => {
   const [email, setEmail] = useState("");
@@ -31,10 +48,10 @@ const SignUpPage = (props) => {
 
   const signup = () => {
     const body = {
-        "email": email,
-        "password": senha,
-        "username": username
-    }
+      email: email,
+      password: senha,
+      username: username,
+    };
     axios
       .post(`${baseURL}/users/signup`, body)
       .then((response) => {
@@ -48,44 +65,53 @@ const SignUpPage = (props) => {
   };
 
   return (
-    <div>
-      <h1>Olá, boas vindas ao LabEddit</h1>
-      
-      <div>
-        <input
-          type="text"
-          onChange={onChangeEmail}
-          placeholder="Email*"
-          value={email}
-          name={"email"}
-          required
-        ></input>
-        <input
-          type="text"
-          onChange={onChangeSenha}
-          placeholder="Senha*"
-          value={senha}
-          name={"senha"}
-          required
-        ></input>
-        <input
+    <ContainerSignup>
+      <Header>
+        <Logo src={logo} alt="logo labeddit" />
+
+        <ButtonLogin onClick={goToLoginPage}>Entrar</ButtonLogin>
+      </Header>
+      <TitleSignup>Olá, boas vindas ao LabEddit!</TitleSignup>
+
+      <ContainerInputs>
+        <Input
           type="text"
           onChange={onChangeUserName}
-          placeholder="Nome do usuário*"
+          placeholder="Nome do usuário"
           value={username}
           name={"username"}
           required
-        ></input>
-
-        <div onClick={signup}>
-          cadastrar
-        </div>
-
-        <div onClick={goToLoginPage}>
-          Entrar
-        </div>
-      </div>
-    </div>
+        ></Input>
+        <Input
+          type="text"
+          onChange={onChangeEmail}
+          placeholder="Email"
+          value={email}
+          name={"email"}
+          required
+        ></Input>
+        <Input
+          type="text"
+          onChange={onChangeSenha}
+          placeholder="Senha"
+          value={senha}
+          name={"senha"}
+          required
+        ></Input>
+      </ContainerInputs>
+      <ContainerButtons>
+        <DisclaimerText>
+          Ao continuar, você concorda com o nosso Contrato de usuário e nossa
+          Política de Privacidade
+        </DisclaimerText>
+        <DisclaimerCheck class="container">
+          <input type="checkbox"></input>
+          <span class="checkmark"></span>
+          Eu concordo em receber emails sobre coisas legais no Labeddit
+        </DisclaimerCheck>
+        <ButtonSignup onClick={signup}>Cadastrar</ButtonSignup>
+      </ContainerButtons>
+    </ContainerSignup>
   );
 };
 

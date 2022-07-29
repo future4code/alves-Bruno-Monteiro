@@ -5,7 +5,8 @@ export const ContainerLogin = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px
+  gap: 20px;
+  font-family: "Noto Sans", "Helvetica";
 `;
 
 export const ContainerLogo = styled.div`
@@ -42,7 +43,7 @@ export const ButtonContinue = styled.button`
   border-radius: 27px;
   width: 90%;
   height: 51px;
-  font-family: "Noto Sans";
+  font-family: "Noto Sans", "Helvetica";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -60,7 +61,7 @@ export const ButtonSignup = styled.button`
   border-radius: 27px;
   width: 90%;
   height: 51px;
-  font-family: "Noto Sans";
+  font-family: "Noto Sans", "Helvetica";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -78,6 +79,7 @@ export const Input = styled.input`
   border-radius: 4px;
   width: 90%;
   padding-left: 10px;
+  font-family: "Noto Sans", "Helvetica";
 `;
 
 export const Line = styled.hr`
@@ -88,7 +90,7 @@ export const Line = styled.hr`
 `;
 
 export const Subhead = styled.p`
-  font-family: "IBM Plex Sans";
+   font-family: "Noto Sans", "Helvetica";
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
