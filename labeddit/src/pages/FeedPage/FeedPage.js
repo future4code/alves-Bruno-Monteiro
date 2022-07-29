@@ -31,12 +31,11 @@ import {
 } from "./styled";
 
 const FeedPage = (props) => {
-  const [errors, setErrors] = useState({ title: false, body: false });
   const [postText, setPostText] = useState("");
   const [postTitle, setPostTitle] = useState("");
 
   const navigate = useNavigate();
-  const { posts, isLoading, getPostComments, getPosts, goToPostPage, deletePostVote, createPostVote} =
+  const { posts, getPosts, goToPostPage, deletePostVote, createPostVote} =
     useContext(GlobalContext);
 
   const onChangePostTitle = (event) => {

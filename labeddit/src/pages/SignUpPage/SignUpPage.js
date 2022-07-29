@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import { baseURL } from "../../Constants/baseURL";
 import logo from "../../Assets/nav-logo.png";
 import {
   ContainerSignup,
-  ContainerLogo,
   ContainerInputs,
   ContainerButtons,
-  ButtonContinue,
   ButtonSignup,
   Input,
-  Line,
-  Subhead,
   Logo,
   ButtonLogin,
   Header,
@@ -28,7 +23,6 @@ const SignUpPage = (props) => {
   const [username, setUserName] = useState("");
 
   const navigate = useNavigate();
-  const pathParams = useParams();
 
   const goToLoginPage = () => {
     navigate("/login");

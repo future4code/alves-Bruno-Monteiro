@@ -37,17 +37,14 @@ import {
 
 const PostPage = (props) => {
   const {
-    posts,
     selectedPost,
-    isLoadingComments,
     postComments,
-    getPosts,
     getPostComments,
     deletePostVote,
     createPostVote,
+    createCommentVote,
+    deleteCommentVote
   } = useContext(GlobalContext);
-  const [errors, setErrors] = useState({ body: false });
-  const { form, onChange, cleanFields } = useForm({ body: "" });
   const [comment, setComment] = useState("");
   const pathParams = useParams();
   const navigate = useNavigate();
@@ -56,7 +53,6 @@ const PostPage = (props) => {
     if (!localStorage.getItem("token")) {
       navigate("/login");
     }
-    console.log(selectedPost);
     getPostComments(pathParams.postId);
   });
 
@@ -87,7 +83,6 @@ const PostPage = (props) => {
       .then((res) => {
         setComment("");
         getPostComments(pathParams.postId);
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -101,10 +96,10 @@ const PostPage = (props) => {
         <PostTitle>{comment.body}</PostTitle>
         <ContainerCounters>
           <ContainerVotesComment>
-            {selectedPost.userVote < 1 ? (
+            {comment.userVote < 1 ? (
               <ButtonVote
                 onClick={() => {
-                  createPostVote(selectedPost.id, 1);
+                  createCommentVote(comment.id, 1);
                 }}
               >
                 {" "}
@@ -113,7 +108,7 @@ const PostPage = (props) => {
             ) : (
               <ButtonVote
                 onClick={() => {
-                  deletePostVote(selectedPost.id);
+                  deleteCommentVote(comment.id);
                 }}
               >
                 {" "}
@@ -121,12 +116,12 @@ const PostPage = (props) => {
               </ButtonVote>
             )}
             <PostCount>
-              {selectedPost.voteSum === null ? 0 : selectedPost.voteSum}
+              {comment.voteSum === null ? 0 : comment.voteSum}
             </PostCount>
-            {selectedPost.userVote > -1 ? (
+            {comment.userVote > -1 ? (
               <ButtonVote
                 onClick={() => {
-                  createPostVote(selectedPost.id, -1);
+                  createCommentVote(comment.id, -1);
                 }}
               >
                 <img src={DownVote} alt="downvote"></img>
@@ -134,7 +129,7 @@ const PostPage = (props) => {
             ) : (
               <ButtonVote
                 onClick={() => {
-                  deletePostVote(selectedPost.id);
+                  deleteCommentVote(comment.id);
                 }}
               >
                 <img src={DownVoteActive} alt="downvote active"></img>

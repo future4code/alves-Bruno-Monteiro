@@ -2,17 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import GlobalContext from "./GlobalContext";
 import { baseURL } from "../Constants/baseURL";
-import { useForm } from "../Hooks/useForm";
-import { goToFeedPage, goToPostPage } from "../routes/coordinator";
 import { useNavigate } from "react-router-dom";
 
 export default function GlobalState(props) {
-  const [signUpSuccess, setSignUpSuccess] = useState(false);
-  const [loginError, setLoginError] = useState(false);
   const [posts, setPosts] = useState([]);
   const [postComments, setPostComments] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingComments, setIsLoadingComments] = useState(false);
   const [selectedPost, setSelectedPost] = useState({});
   const navigate = useNavigate();
 
@@ -58,7 +52,6 @@ export default function GlobalState(props) {
 
   const getPosts = () => {
     // setPosts(postsMock);
-    setIsLoading(true);
     axios
       .get(baseURL + "/posts", {
         headers: {
@@ -66,7 +59,6 @@ export default function GlobalState(props) {
         },
       })
       .then((res) => {
-        setIsLoading(false);
         setPosts(res.data);
       })
       .catch((err) => {
@@ -76,7 +68,6 @@ export default function GlobalState(props) {
 
   const getPostComments = (id) => {
     // setPostComments(commentsMock);
-    setIsLoadingComments(true);
     axios
       .get(baseURL + `/posts/${id}/comments`, {
         headers: {
@@ -84,7 +75,6 @@ export default function GlobalState(props) {
         },
       })
       .then((res) => {
-        setIsLoadingComments(false);
         setPostComments(res.data);
       })
       .catch((err) => {
@@ -126,22 +116,52 @@ export default function GlobalState(props) {
       });
   };
 
-  const values = {
+  const deleteCommentVote = (id) => {
+    axios
+      .delete(baseURL + `/comments/${id}/votes`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        getPostComments(selectedPost.id);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-    setSignUpSuccess,
-    signUpSuccess,
-    loginError,
-    setLoginError,
+  const createCommentVote = (id, vote) => {
+    const body = {
+      direction: vote,
+    };
+
+    axios
+      .post(baseURL + `/comments/${id}/votes`, body, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        getPostComments(selectedPost.id);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const values = {
     getPosts,
     posts,
-    isLoading,
     getPostComments,
-    isLoadingComments,
     postComments,
     goToPostPage,
     selectedPost,
     deletePostVote,
     createPostVote,
+    deleteCommentVote,
+    createCommentVote
+
   };
 
   return (
