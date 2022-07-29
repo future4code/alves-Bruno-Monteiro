@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { baseUrl} from "../../Constants/url";
+import { baseURL } from '../../Constants/baseURL'
 
 const SignUpPage = (props) => {
   const [email, setEmail] = useState("");
@@ -36,10 +36,10 @@ const SignUpPage = (props) => {
         "username": username
     }
     axios
-      .post(`${baseUrl}/users/signup`, body)
+      .post(`${baseURL}/users/signup`, body)
       .then((response) => {
         window.localStorage.setItem("token", response.data.token);
-        navigate("/feed");
+        navigate("/");
       })
       .catch((err) => {
         alert("Email ou senha incorretos!");
