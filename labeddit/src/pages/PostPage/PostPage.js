@@ -153,7 +153,7 @@ const PostPage = (props) => {
 
       <CardPost key={selectedPost.id}>
         <PostUser>Enviado por: {selectedPost.username}</PostUser>
-        <PostTitle>{selectedPost.title}</PostTitle>
+        <PostTitle>{selectedPost.body}</PostTitle>
         <ContainerCounters>
           <ContainerVotes>
             {selectedPost.userVote === null || selectedPost.userVote < 1 ? (

@@ -83,9 +83,15 @@ const FeedPage = (props) => {
 
   const formattedPosts = posts.map((post, index) => {
     return (
+      
+      
       <CardPost key={post.id}>
-        <PostUser>Enviado por: {post.username}</PostUser>
-        <PostTitle>{post.title}</PostTitle>
+        <PostUser onClick={() => {
+              goToPostPage(post.id);
+            }}>Enviado por: {post.username}</PostUser>
+        <PostTitle onClick={() => {
+              goToPostPage(post.id);
+            }}>{post.title}</PostTitle>
         <ContainerCounters>
           <ContainerVotes>
             {post.userVote < 1 ? (
@@ -136,6 +142,7 @@ const FeedPage = (props) => {
           </ButtonComment>
         </ContainerCounters>
       </CardPost>
+    
     );
   });
 
