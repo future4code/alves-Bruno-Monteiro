@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+**Projeto LabeEddit**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+***Desenvolvedor***
 
-### `npm start`
+Bruno Monteiro
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+***O que funciona:***
 
-### `npm test`
+Mobile First
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Rotas
 
-### `npm run build`
+Header
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Login
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Signup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Logout
 
-### `npm run eject`
+Páginas Feed e PostsDetails
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Criar Post e Comentar
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Atualizar página após postar e comentar
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Votar e Remover voto
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Cores condicionais das setas
 
-## Learn More
+***Esse projeto foi desenvolvido com as seguintes tecnologias:***
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+React Router
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Axios
 
-### Code Splitting
+GlobalState
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+API LabEddit
 
-### Analyzing the Bundle Size
+Styled-components
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+***Link Surge:***
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+https://colorful-prose.surge.sh/login
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+***Imagens do Projeto:***
 
-### Deployment
+<img width="241" alt="Screen Shot 2022-07-29 at 9 29 31 PM" src="https://user-images.githubusercontent.com/104601906/182145363-5a998169-d320-4904-be13-9cb78def981a.png">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<img width="251" alt="Screen Shot 2022-07-29 at 9 26 50 PM" src="https://user-images.githubusercontent.com/104601906/182145403-cdc14eb3-50a9-4cb6-ba7e-c83abd1456e1.png">
 
-### `npm run build` fails to minify
+<img width="247" alt="Screen Shot 2022-07-29 at 9 25 48 PM" src="https://user-images.githubusercontent.com/104601906/182145424-9fc8ab82-70aa-4a60-9143-fd4afaa0bf7d.png">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img width="254" alt="Screen Shot 2022-07-29 at 9 25 33 PM" src="https://user-images.githubusercontent.com/104601906/182145450-859550f5-c3a7-4acd-aba3-e0825e36af55.png">
+
+<img width="248" alt="Screen Shot 2022-07-29 at 9 30 24 PM" src="https://user-images.githubusercontent.com/104601906/182145473-ad15890a-1a93-498d-a97f-1efc440bb876.png">
+
+
+
+
+
+
