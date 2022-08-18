@@ -18,7 +18,6 @@ app.get('/test', (req,res) => {
   })
 
 
-
   app.put("/create", (req, res) => {
     try {
       const { name, price } = req.body;
@@ -52,7 +51,6 @@ app.get('/test', (req,res) => {
 app.get("/products", (req,res) => {
     res.status(200).send(products)
 })
-
 
 
 app.put("/editprice", (req, res) => {
@@ -92,7 +90,6 @@ app.put("/editprice", (req, res) => {
     }
   })
   
-
 
 app.delete("/delete/:id", (req, res) => {
     try {
