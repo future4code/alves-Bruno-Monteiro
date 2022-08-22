@@ -123,8 +123,10 @@
 
 ## EXERCICIO 4
 
+SELECT * FROM Actor
+WHERE (name LIKE "A%" OR name LIKE "J%") AND salary > 300000
 ### a) 
-A Query acima nesta selecionando todas as propriedades da tabela ator para os regidstros que respeitem a condicao seguinte: Nome comecando com A ou J e um salario acima de 300K
+A Query acima esta selecionando todas as propriedades da tabela ator para os regidstros que respeitem a condicao seguinte: Nome comecando com A ou J e um salario acima de 300K
 
 ### b) 
 -- SELECT * FROM Actor
