@@ -123,7 +123,7 @@
 
 ## EXERCICIO 4
 
-- a) A Query acima nesta selecionando todas as propriedades da tabela ator para os regidstros que respeitem a condicao seguinte: Nome comecando com A ou J e um salario acima de 300K
+### a) A Query acima nesta selecionando todas as propriedades da tabela ator para os regidstros que respeitem a condicao seguinte: Nome comecando com A ou J e um salario acima de 300K
 
 ### b) 
 -- SELECT * FROM Actor
