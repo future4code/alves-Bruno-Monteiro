@@ -1,29 +1,20 @@
-### EXERCICIO 1
+## EXERCICIO 1
+### a) 
+- Utilizamos o VARCHAR para declarar id com no maximo 255 caracteres e é um primary key. 
+- Utilizamos o VARCHAR para declarar id tambem com o maximo de 255 caracteres e ele nao pode ser nulo.
+- Utilizamos FLOAT para declarar salary e tambem nao pode ser vazio.
+- Utilizamos DATE para declarar birth_date e nao pode ser vazio.
+- Utilizamos VARCHAR no gender  com no maximo 6 caracteres que nao pode ser vazio.
 
--- CREATE TABLE Actor (
---     id VARCHAR(255) PRIMARY KEY,
---     name VARCHAR (255) NOT NULL,
---     salary FLOAT NOT NULL,
---     birth_date DATE NOT NULL,
---     gender VARCHAR(6) NOT NULL
--- );
+### b)
+- SHOW DATABASES;# Foi mostrado o nome das bases de dados existentes
+- SHOW TABLES; # Foi mostrado a tabela de dados existente
 
-#a) 
-# Utilizamos o VARCHAR para declarar id com no maximo 255 caracteres e é um primary key. 
-# Utilizamos o VARCHAR para declarar id tambem com o maximo de 255 caracteres e ele nao pode ser nulo.
-# Utilizamos FLOAT para declarar salary e tambem nao pode ser vazio.
-# Utilizamos DATE para declarar birth_date e nao pode ser vazio.
-# Utilizamos VARCHAR no gender  com no maximo 6 caracteres que nao pode ser vazio.
+### c)
+- DESCRIBE Actor;
+- Mostra as propriedades e as descricoes das colunas da tabela
 
-#b)
--- SHOW DATABASES;# Foi mostrado o nome das bases de dados existentes
--- SHOW TABLES; # Foi mostrado a tabela de dados existente
-
-#c)
--- DESCRIBE Actor;
-# Mostra as propriedades e as descricoes das colunas da tabela
-
-### EXERCICIO 2
+## EXERCICIO 2
 
 -- INSERT INTO Actor (id, name, salary, birth_date, gender)
 -- VALUES(
@@ -34,7 +25,7 @@
 --   "male"
 -- );
 
-#a)
+### a)
 -- INSERT INTO Actor (id, name, salary, birth_date, gender)
 -- VALUES(
 --   "002", 
@@ -44,7 +35,7 @@
 --   "female"
 -- );
 
-#b)
+### b)
 -- INSERT INTO Actor (id, name, salary, birth_date, gender)
 -- VALUES(
 --   "002", 
@@ -53,9 +44,9 @@
 --   "1986-12-28", 
 --   "male"
 -- );
-# Foi gerado um erro de duplicacao com a seguinte mensagem: Código de erro: 1062. Entrada duplicada '002' para a chave 'PRIMARY'
+- Foi gerado um erro de duplicacao com a seguinte mensagem: Código de erro: 1062. Entrada duplicada '002' para a chave 'PRIMARY'
 
-#c)
+### c)
 -- INSERT INTO Actor (id, name, salary,birth_date, gender)
 -- VALUES(
 --   "003", 
@@ -64,9 +55,9 @@
 --   "1929-10-19", 
 --   "female"
 -- );
-# Foi gerado o erro(Código de erro: 1136. A contagem de colunas não corresponde à contagem de valores na linha 1) Faltam as propriedades birth_date, gender.
+- Foi gerado o erro(Código de erro: 1136. A contagem de colunas não corresponde à contagem de valores na linha 1) Faltam as propriedades birth_date, gender.
 
-#d)
+### d)
 -- INSERT INTO Actor (name,id, salary, birth_date, gender)
 -- VALUES(
 --   "004",
@@ -75,7 +66,7 @@
 --   "1949-04-18", 
 --   "male"
 -- );
-# Foi gerado o erro(Código do erro: 1364. O campo 'name' não tem um valor padrão) Falta a propriedade nome.
+- Foi gerado o erro(Código do erro: 1364. O campo 'name' não tem um valor padrão) Falta a propriedade nome.
 
 #e)
 -- INSERT INTO Actor (id, name, salary, birth_date, gender)
@@ -86,9 +77,9 @@
 --   "1979-03-26", 
 --   "female"
 -- );
-# Foi gerado o erro(Código de erro: 1292. Valor de data incorreto: '1950' para a coluna 'birth_date' na linha 1) faltavam aspas no birth date
+- Foi gerado o erro(Código de erro: 1292. Valor de data incorreto: '1950' para a coluna 'birth_date' na linha 1) faltavam aspas no birth date
 
-#f)
+### f)
 -- INSERT INTO Actor (id, name, salary, birth_date, gender)
 -- VALUES(
 --   "006", 
@@ -107,48 +98,48 @@
 --   "female"
 -- );
 
-### EXERCICIO 3
+## EXERCICIO 3
 
-#a)
+### a)
 -- SELECT * from Actor 
 -- WHERE gender = "female"
 
-#b)
+### b)
 -- SELECT salary from Actor 
 -- WHERE name = "Tony Ramos"
 
-#c)
+### c)
 -- SELECT * from Actor 
 -- WHERE gender = "invalid"
-# O resultado é 0 pois nao existe nenhum registro com o gender invalid.
+- O resultado é 0 pois nao existe nenhum registro com o gender invalid.
 
-#d)
+### d)
 -- SELECT id, name, salary from Actor 
 -- WHERE salary   >=	50000
 
-#e)
+### e)
 -- SELECT id, nome from Actor WHERE id = "002"
-# Foi gerado o erro (Código de erro: 1054. Coluna desconhecida 'nome' na 'lista de campos') Esse ocorreu pq o correto deveria ser name.
+- Foi gerado o erro (Código de erro: 1054. Coluna desconhecida 'nome' na 'lista de campos') Esse ocorreu pq o correto deveria ser name.
 
-### EXERCICIO 4
+## EXERCICIO 4
 
-# a) A Query acima nesta selecionando todas as propriedades da tabela ator para os regidstros que respeitem a condicao seguinte: Nome comecando com A ou J e um salario acima de 300K
+- a) A Query acima nesta selecionando todas as propriedades da tabela ator para os regidstros que respeitem a condicao seguinte: Nome comecando com A ou J e um salario acima de 300K
 
-#b) 
+### b) 
 -- SELECT * FROM Actor
 -- WHERE (name NOT LIKE "A%") AND salary > 350000
 
-#c)
+### c)
 -- SELECT * FROM Actor
 -- WHERE name LIKE "%g%" OR name LIKE "%G%";
 
-#d)
+### d)
 -- SELECT * FROM Actor
 -- WHERE (name LIKE "%g%" OR name LIKE "%G%" OR name LIKE "%a%" OR name LIKE "%A%") AND salary BETWEEN 350000 AND 900000
 
-### EXERCICIO 5
+## EXERCICIO 5
 
--- USE `alves-bruno-monteiro`;
+
 -- CREATE TABLE Movies (
 --     id VARCHAR(255) PRIMARY KEY,
 --     name VARCHAR (255) NOT NULL,
@@ -193,36 +184,36 @@
 -- "9"
 -- );
 
-### EXERCICIO 6
+## EXERCICIO 6
 
-#a)
+### a)
 -- SELECT id, name, avaliacao from Movies 
 -- WHERE id = "004"
 
-#b)
+### b)
 -- SELECT * from Movies 
 -- WHERE name = "Doce de mãe"
 
-#c)
+### c)
 -- SELECT id, name, sinopse from Movies 
 -- WHERE avaliacao < 7
 
-### EXERCICIO 7
+## EXERCICIO 7
 
-#a)
+### a)
 -- SELECT * from Movies 
 -- WHERE name LIKE "%vida%"
 
-#b)
+### b)
 -- SELECT * FROM Movies
 -- WHERE name LIKE "%cidade%" OR
 --       sinopse LIKE "%senhora%";
 
-#c)
+### c)
 -- SELECT * FROM Movies
 -- WHERE data_de_lancamento < "2022-08-22";
 
-#d)
+### d)
 
 -- SELECT * FROM Movies
 -- WHERE data_de_lancamento < "2022-08-22" AND 
