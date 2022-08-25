@@ -1,6 +1,5 @@
 # Projeto LabEddit
 
-![Logo](./img-readme/Logo.svg)
 
 
 # 📄 Sobre
