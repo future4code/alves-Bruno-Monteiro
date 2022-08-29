@@ -91,7 +91,7 @@ export const createTask = async (task: Task): Promise<void> => {
                 status: task.status,
                 creatorUserId: task.creatorUserId
             })
-            .into("Tasks")
+            .into("to_do_list_tasks")
 
     } catch (error) {
         throw new Error(error.sqlMessage || error.message)
@@ -127,7 +127,7 @@ export const createResponsible = async (task_relation: TaskRelations): Promise<v
                 task_id: task_relation.task_id,
                 user_id: task_relation.user_id
             })
-            .into("Task_Relations")
+            .into("to_do_list_assignees")
 
     } catch (error) {
         throw new Error(error.sqlMessage || error.message)
@@ -136,7 +136,7 @@ export const createResponsible = async (task_relation: TaskRelations): Promise<v
 
 export const deleteTaskById = async (task_id: string): Promise<any> => {
     try {
-        const result =  await connection("Task_Relations")
+        const result =  await connection("to_do_list_assignees")
         .delete("*")
         .where("task_id", task_id) 
         
