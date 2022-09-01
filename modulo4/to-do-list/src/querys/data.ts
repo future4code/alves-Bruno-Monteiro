@@ -36,7 +36,7 @@ export const createUser = async (user: User): Promise<void> => {
 
 export const getAllUsers = async (): Promise<any> => {
     try {
-        const result = await connection("Users")
+        const result = await connection("to_do_list_users")
         .select("*")
         return (result)
     } catch (error) {
@@ -46,7 +46,7 @@ export const getAllUsers = async (): Promise<any> => {
 
 export const getUserById = async (id: string): Promise<any> => {
     try {
-        const result = await connection("Users")
+        const result = await connection("to_do_list_users")
         .select("id", "nickname")
         .where("id", id) 
         return (result[0])
@@ -57,7 +57,7 @@ export const getUserById = async (id: string): Promise<any> => {
 
 export const getUserByNickname = async (nickname: string): Promise<any> => {
     try {
-        const result = await connection("Users")
+        const result = await connection("to_do_list_users")
         .select("id", "nickname")
         .where("nickname", nickname) 
         return (result[0])
@@ -72,7 +72,7 @@ export const editUser = async (user: {
     nickname:string 
    }): Promise<void> => {
    try {
-       await connection("Users")
+       await connection("to_do_list_users")
            .update({ name: user.name, nickname: user.nickname })
            .where("id", user.id)
 
@@ -89,7 +89,7 @@ export const createTask = async (task: Task): Promise<void> => {
                 description: task.description,
                 deadline: task.deadline,
                 status: task.status,
-                creatorUserId: task.creatorUserId
+                author_id: task.creatorUserId
             })
             .into("to_do_list_tasks")
 
@@ -100,7 +100,7 @@ export const createTask = async (task: Task): Promise<void> => {
 
 export const getTaskById = async (task_id: string): Promise<any> => {
     try {
-        const result = await connection("Tasks")
+        const result = await connection("to_do_list_tasks")
         .select("*")
         .where("task_id", task_id) 
         return (result[0])
@@ -111,9 +111,9 @@ export const getTaskById = async (task_id: string): Promise<any> => {
 
 export const getTaskByCreator = async (creatorUserId: string): Promise<any> => {
     try {
-        const result = await connection("Tasks")
+        const result = await connection("to_do_list_tasks")
         .select("*")
-        .where("creatorUserId", creatorUserId) 
+        .where("author_id", creatorUserId) 
         return (result[0])
     } catch (error) {
         throw new Error(error.sqlMessage || error.message)
@@ -125,7 +125,7 @@ export const createResponsible = async (task_relation: TaskRelations): Promise<v
         await connection
             .insert({
                 task_id: task_relation.task_id,
-                user_id: task_relation.user_id
+                assignee_id: task_relation.user_id
             })
             .into("to_do_list_assignees")
 
@@ -136,11 +136,11 @@ export const createResponsible = async (task_relation: TaskRelations): Promise<v
 
 export const deleteTaskById = async (task_id: string): Promise<any> => {
     try {
-        const result =  await connection("to_do_list_assignees")
+        const result =  await connection("to_do_list_tasks")
         .delete("*")
         .where("task_id", task_id) 
         
-        await connection("Tasks")
+        await connection("to_do_list_tasks")
         .delete("*")
         .where("task_id", task_id)
         
