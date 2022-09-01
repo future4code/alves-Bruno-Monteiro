@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "removeComments": true,   
+    "useUnknownInCatchVariables": false,
+    "noImplicitAny": true, 
+    "target": "es6",
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./build",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
