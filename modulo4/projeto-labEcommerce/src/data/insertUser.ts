@@ -1,4 +1,4 @@
-import { userData } from "../types";
+import { userData } from "../types/typesUser";
 import connection from "./connection";
 
 

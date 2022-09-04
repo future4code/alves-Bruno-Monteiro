@@ -11,3 +11,8 @@ export type userData = {
     password:string
 
 }
+
+export type userInfo = {
+    idPerson:string,
+    namePerson:string
+}

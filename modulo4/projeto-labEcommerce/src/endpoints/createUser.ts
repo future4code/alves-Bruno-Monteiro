@@ -1,6 +1,6 @@
 import { Request , Response } from "express"
 import insertUser from "../data/insertUser";
-import { userInput,userData } from "../types"
+import { userInput,userData } from "../types/typesUser"
 
 export default async function createUser(req:Request, res:Response) {
     try {

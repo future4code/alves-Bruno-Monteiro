@@ -1,12 +1,48 @@
 POST http://localhost:3003/user
 Content-Type: application/json
-
 {
     "name": "afra",
     "email":"afra@gmail.com",
     "password":"123@afra"
 }
 
+
+ ###
+
+GET http://localhost:3003/users
+
+
 ###
- 
- GET http://localhost:3003/users
+
+POST http://localhost:3003/products
+Content-Type: application/json
+
+{
+    "name": "MacBook Air",
+    "price":2000.10,
+    "image_url":"https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ"
+}
+
+{
+    "name": "monitor",
+    "price":600.10,
+    "image_url":"https://www.amazon.com/ASUS-VG248QE-1920x1080-Gaming-Monitor/dp/B00B2HH7G0"
+}
+
+###
+GET http://localhost:3003/products
+
+###
+
+POST http://localhost:3003/purchases
+Content-Type: application/json
+
+{
+    "userId":"1662149206365",
+    "productId":"1662311706351",
+    "quantity":10
+}
+
+###
+
+GET http://localhost:3003/users/1662149206365/purchases
