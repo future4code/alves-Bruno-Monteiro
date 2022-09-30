@@ -6,9 +6,9 @@ POST http://localhost:3003/users/signup
 Content-Type: application/json
 
 {
-    "name": "alice",
-    "email": "alice@gmail.com",
-    "password": "alice99"
+    "name": "mariana",
+    "email": "mari@gmail.com",
+    "password": "mari123"
 }
 
 ### Login
@@ -16,6 +16,16 @@ POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-    "email": "astrodev@gmail.com",
-    "password": "bananinha"
+    "email": "mari@gmail.com",
+    "password": "mari123"
+}
+
+### Show
+GET  http://localhost:3003/users/show
+Content-Type: application/json
+
+{
+      "id": "1000",
+      "band": "iron Maden",
+      "startsAt": "2022/12/05"
 }

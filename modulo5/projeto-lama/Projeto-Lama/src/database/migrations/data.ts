@@ -1,4 +1,5 @@
 import { IUserDB, USER_ROLES } from "../../models/User"
+import { IShowDB } from "../../models/Show";
 
 export const users: IUserDB[] = [
     {
@@ -23,3 +24,26 @@ export const users: IUserDB[] = [
         role: USER_ROLES.NORMAL
     }
 ]
+
+export const shows: IShowDB[] = [
+    {
+      id: "1000",
+      band: "iron Maden",
+      startsAt: new Date("2022/12/05")
+    },
+    {
+      id: "1001",
+      band: "The Off Spring",
+      startsAt: new Date("2022/12/06")
+    },
+    {
+      id: "1002",
+      band: "The National",
+      startsAt: new Date("2022/12/07")
+    },
+    {
+      id: "1003",
+      band: "System of a Down",
+      startsAt: new Date("2022/12/08")
+    },
+  ]
