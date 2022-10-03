@@ -15,15 +15,7 @@ export class ShowDatabase extends BaseDatabase {
     return showDB
   }
 
-  public create = async (show: Show): Promise<void> => {
-    const showDB = this.toShowDBModel(show)
-
-    await BaseDatabase
-      .connection(ShowDatabase.TABLE_LAMA_SHOWS)
-      .insert(showDB)
-  }
-
-  public findShowByDay = async (date: object): Promise<IShowDB | undefined> => {
+  public findShowByDay = async (date: Date): Promise<IShowDB | undefined> => {
     const result: IShowDB[] = await BaseDatabase
       .connection(ShowDatabase.TABLE_LAMA_SHOWS)
       .select()
@@ -32,20 +24,19 @@ export class ShowDatabase extends BaseDatabase {
     return result[0]
   }
 
-  public getShows = async (): Promise<IShowDB[] | undefined> => {
+  public create = async (show: Show): Promise<void> => {
+    const showDB = this.toShowDBModel(show)
+
+    await BaseDatabase
+      .connection(ShowDatabase.TABLE_LAMA_SHOWS)
+      .insert(showDB)
+  }
+
+  public getShows = async (): Promise<IShowDB[]> => {
     const result: IShowDB[] = await BaseDatabase
       .connection(ShowDatabase.TABLE_LAMA_SHOWS)
       .select('*')
 
     return result
-  }
-
-  public findShowById = async (id_show: string): Promise<IShowDB | undefined> => {
-    const result: IShowDB[] = await BaseDatabase
-      .connection(ShowDatabase.TABLE_LAMA_SHOWS)
-      .select()
-      .where({id: id_show})
-
-    return result[0]
   }
 }
