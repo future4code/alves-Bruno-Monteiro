@@ -16,7 +16,7 @@ import {
   TextFooter,
   Title,
   OptGroup,
-} from "./styled";
+} from "../styles/styled";
 import { useNavigate } from "react-router-dom";
 import logo from "../img/Logo_Sena.png";
 import axios from "axios";
@@ -25,8 +25,6 @@ import { colors } from "../constants/colors";
 import useRequestData from "../hooks/UseRequestData";
 
 const Lottery = (props) => {
-  // const [lotteries] = useRequestData([], `${BASE_URL}/loterias`);
-  // const [draws] = useRequestData([], `${BASE_URL}/loterias-concursos`);
 
   const [lotteries, setLotteries] = useState([]);
   const [draws, setDraws] = useState([]);
@@ -41,7 +39,7 @@ const Lottery = (props) => {
         setLotteries(res.data);
       })
       .catch((err) => {
-        console.log(err);
+      
       });
   }, []);
 
@@ -53,7 +51,7 @@ const Lottery = (props) => {
         getDraw(res.data[0].concursoId);
       })
       .catch((err) => {
-        console.log(err);
+        
       });
   }, []);
 
@@ -77,7 +75,7 @@ const Lottery = (props) => {
         setDraw(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        
       });
   };
 

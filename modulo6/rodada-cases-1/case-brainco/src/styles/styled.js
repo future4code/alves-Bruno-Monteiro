@@ -10,11 +10,12 @@ const DropDown = styled.select`
   border-radius: 9px;
   border: 0;
   outline: none;
-  /* filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.05)); */
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+  
   @media screen and (max-width: 700px) {
     text-align: center;
     margin: auto;
+    font-size: larger;
   }
 `;
 
@@ -51,6 +52,7 @@ const MainContainer = styled.div`
   display: flex;
   margin: 0;
   overflow: hidden;
+ 
   @media screen and (max-width: 700px) {
     flex-direction: column;
   }
@@ -69,15 +71,6 @@ const ColorContainer = styled.div`
     padding: 0;
     height: 40%;
   }
-  /* mask-image: url(${greenArch}); */
-  /* background-color: ${(props) => props.color}; */
-  /* mask-size: inherit;
-  mask-size: cover; */
-  /* border-top-left-radius: 70% 15%;
-    border-top-right-radius: 70% 15%; */
-
-  /* border-bottom-left-radius:50%;
-    border-bottom-right-radius:50%; */
 `;
 
 const TitleContainer = styled.div`
@@ -100,7 +93,7 @@ const TitleContainer = styled.div`
 const ImgLogo = styled.img`
   width: 60px;
   height: 60px;
-  /* margin-right: 20px; */
+  
   @media screen and (max-width: 700px) {
     margin: auto;
     margin-bottom: 10px;
@@ -136,6 +129,7 @@ const Circle = styled.div`
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
+  
   @media screen and (max-width: 700px) {
     display: flex;
     text-align: center;
@@ -178,13 +172,8 @@ const InfoText = styled.span`
 
 const ResultsContainer = styled.div`
   width: 70%;
-  /* border-bottom-left-radius:50%;
-    border-bottom-right-radius:50%; */
-  /* border-top-left-radius: 50%;
-  border-bottom-left-radius: 50%; */
   bottom: 35%;
- height: 140%;
-  /* right: -90%; */
+  height: 140%;
   border-top-left-radius: 100%;
   border-bottom-left-radius: 100%;
   background-color: #efefef;
@@ -202,6 +191,8 @@ const ResultsContainer = styled.div`
     border-bottom-left-radius: 0%;
     padding: 0;
     justify-content: space-between;
+    border-top-left-radius: 70% 15%;
+    border-top-right-radius: 70% 15%;
   }
 `;
 
@@ -262,6 +253,7 @@ const TextFooter = styled.span`
     bottom: 0;
   }
 `;
+
 
 export {
   DropDown,
