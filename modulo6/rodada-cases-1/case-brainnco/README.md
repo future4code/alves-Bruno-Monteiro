@@ -11,8 +11,18 @@ O projeto é um case proposto pela empresa Brainnco. Aplicação Front-End Web q
 - Ao mudar o combo-box, o tema do sorteio, número do sorteio, data do sorteio e números sorteados também mudam.
 - A aplicação é responsiva para mobile.
 
+## 🔗 Link para visualização do site (SURGE)
+plucky-shock.surge.sh
 #### Desktop:
+![error_ocurred](https://user-images.githubusercontent.com/104601906/194668647-3bb62624-68f4-400d-be35-36363c994c9c.png)
 
+![spinner_loading](https://user-images.githubusercontent.com/104601906/194668651-d8972164-93b1-43f9-a1a6-93f8513af5f4.png)
+
+![megasena](https://user-images.githubusercontent.com/104601906/194668661-7c7f8345-b99f-4767-9e59-fc7ed91105eb.png)
+
+![lotomania](https://user-images.githubusercontent.com/104601906/194668680-4c67564a-201c-4080-8167-74bd964082ad.png)
+
+![errorpage](https://user-images.githubusercontent.com/104601906/194668721-3e4f703c-d8df-4a2d-b41e-4d090b120c0a.png)
 
 
 #### Mobile:
