@@ -15,22 +15,25 @@ import {
   Number,
   TextFooter,
   Title,
-  OptGroup,
+  ErrorMessage,
+  Spinner
 } from "../styles/styled";
 import { useNavigate } from "react-router-dom";
 import logo from "../img/Logo_Sena.png";
 import axios from "axios";
 import { BASE_URL } from "../constants/links";
 import { colors } from "../constants/colors";
-import useRequestData from "../hooks/UseRequestData";
+import spinner from "../img/spinner.gif"
 
 const Lottery = (props) => {
-
   const [lotteries, setLotteries] = useState([]);
   const [draws, setDraws] = useState([]);
   const [draw, setDraw] = useState(undefined);
   const [selectedLottery, setSelectedLottery] = useState("0");
   const [selectedColor, setSelectedColor] = useState("#6BEFA3");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -39,9 +42,9 @@ const Lottery = (props) => {
         setLotteries(res.data);
       })
       .catch((err) => {
-      
+        setErrorMessage("An error has ocurred. Please try again!");
       });
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     axios
@@ -51,7 +54,7 @@ const Lottery = (props) => {
         getDraw(res.data[0].concursoId);
       })
       .catch((err) => {
-        
+        setErrorMessage("An error has ocurred. Please try again!");
       });
   }, []);
 
@@ -63,9 +66,11 @@ const Lottery = (props) => {
     });
     getDraw(selectedDraw[0].concursoId);
 
-    setSelectedColor(colors.filter((color) => {
-      return color.id === parseInt(event.target.value);
-    })[0].color);
+    setSelectedColor(
+      colors.filter((color) => {
+        return color.id === parseInt(event.target.value);
+      })[0].color
+    );
   };
 
   const getDraw = (drawId) => {
@@ -75,16 +80,16 @@ const Lottery = (props) => {
         setDraw(res.data);
       })
       .catch((err) => {
-        
+        setErrorMessage("An error has ocurred. Please try again!");
       });
   };
 
   return (
     <MainContainer color={selectedColor}>
-      {lotteries.length > 0 ? (
-        <ColorContainer>
+      <ColorContainer>
+      {errorMessage && <ErrorMessage> {errorMessage} </ErrorMessage>}
+        {lotteries.length > 0 ? (
           <DropDown value={selectedLottery} onChange={onChangeLottery}>
-            <OptGroup>
             {lotteries.map((lottery) => {
               return (
                 <Option key={lottery.id} value={lottery.id}>
@@ -92,32 +97,35 @@ const Lottery = (props) => {
                 </Option>
               );
             })}
-            </OptGroup>
           </DropDown>
-          <TitleContainer>
-            <ImgLogo src={logo}></ImgLogo>
-            <Title>
-              {
-                lotteries.filter((lottery) => {
-                  return lottery.id === parseInt(selectedLottery);
-                })[0].nome.toUpperCase()
-              }
-            </Title>
-          </TitleContainer>
-          <InfoContainer>
-            <InfoTitle>CONCURSO</InfoTitle>
-            {draw !== undefined ? (
-              <InfoText>
-                {draw.id} - {new Date(draw.data).toLocaleDateString()}
-              </InfoText>
-            ) : (
-              "Loading..."
-            )}
-          </InfoContainer>
-        </ColorContainer>
-      ) : (
-        " Loading..."
-      )}
+        ) : (
+          <Spinner src={spinner} alt="loading"/>
+        )}
+        <TitleContainer>
+          <ImgLogo src={logo}></ImgLogo>
+          {lotteries.length > 0 ? (
+          <Title>
+            {lotteries
+              .filter((lottery) => {
+                return lottery.id === parseInt(selectedLottery);
+              })[0]
+              .nome.toUpperCase()}
+          </Title>
+          ) : (
+            <Spinner src={spinner} alt="loading"/>
+          )}
+        </TitleContainer>
+        <InfoContainer>
+          <InfoTitle>CONCURSO</InfoTitle>
+          {draw !== undefined ? (
+            <InfoText>
+              {draw.id} - {new Date(draw.data).toLocaleDateString()}
+            </InfoText>
+          ) : (
+            <Spinner src={spinner} alt="loading"/>
+          )}
+        </InfoContainer>
+      </ColorContainer>
       <ResultsContainer>
         <NumbersContainer>
           {draw !== undefined
@@ -128,7 +136,8 @@ const Lottery = (props) => {
                   </Circle>
                 );
               })
-            : " Loading..."}
+            : <Spinner src={spinner} alt="loading"/>
+            }
         </NumbersContainer>
         <TextFooter>
           Este sorteio é meramente ilustrativo e não possui nenhuma ligação com

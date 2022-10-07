@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import greenArch from "../img/Sidebar.svg";
 
 const DropDown = styled.select`
   width: 216px;
@@ -11,7 +10,7 @@ const DropDown = styled.select`
   border: 0;
   outline: none;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-  
+
   @media screen and (max-width: 700px) {
     text-align: center;
     margin: auto;
@@ -20,8 +19,7 @@ const DropDown = styled.select`
 `;
 
 const Option = styled.option`
-  font-family: "Montserrat", sans-serif;
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
+ font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
@@ -32,18 +30,6 @@ const Option = styled.option`
   }
 `;
 
-const OptGroup = styled.optgroup`
-  font-family: "Montserrat", sans-serif;
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
-  font-weight: 500;
-  font-size: 30px;
-  line-height: 18px;
-  color: #333333;
-
-  @media screen and (max-width: 700px) {
-    font-size: 20px;
-  }
-`;
 
 const MainContainer = styled.div`
   width: 100%;
@@ -52,7 +38,7 @@ const MainContainer = styled.div`
   display: flex;
   margin: 0;
   overflow: hidden;
- 
+
   @media screen and (max-width: 700px) {
     flex-direction: column;
   }
@@ -74,14 +60,12 @@ const ColorContainer = styled.div`
 `;
 
 const TitleContainer = styled.div`
-  font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
   color: #ffffff;
   display: flex;
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
 
   @media screen and (max-width: 700px) {
     flex-direction: column;
@@ -93,7 +77,7 @@ const TitleContainer = styled.div`
 const ImgLogo = styled.img`
   width: 60px;
   height: 60px;
-  
+
   @media screen and (max-width: 700px) {
     margin: auto;
     margin-bottom: 10px;
@@ -101,14 +85,13 @@ const ImgLogo = styled.img`
 `;
 
 const Title = styled.span`
-  font-family: "Montserrat", sans-serif;
+ font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 30px;
   line-height: 37px;
   margin: auto 20px;
   color: #ffffff;
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
 `;
 
 const Circle = styled.div`
@@ -129,7 +112,7 @@ const Circle = styled.div`
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  
+
   @media screen and (max-width: 700px) {
     display: flex;
     text-align: center;
@@ -140,14 +123,13 @@ const InfoContainer = styled.div`
 `;
 
 const InfoTitle = styled.span`
-  font-family: "Montserrat", sans-serif;
+ font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.135em;
   color: #ffffff;
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
 `;
 
 const InfoText = styled.span`
@@ -158,7 +140,6 @@ const InfoText = styled.span`
   line-height: 24px;
   color: #ffffff;
   margin-top: 10px;
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
 
   @media screen and (max-width: 700px) {
     font-weight: 500;
@@ -218,14 +199,13 @@ const NumbersContainer = styled.div`
 `;
 
 const Number = styled.span`
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 27px;
   line-height: 106px;
   color: #333333;
   margin: auto;
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
 
   @media screen and (max-width: 700px) {
     line-height: 76px;
@@ -254,6 +234,20 @@ const TextFooter = styled.span`
   }
 `;
 
+const ErrorMessage = styled.div`
+  font-family: "Montserrat", sans-serif;
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
+  padding-top: 20px;
+  text-align: center;
+  color: #ffffff;
+  line-height: 30px;
+  font-size: 21px;
+`;
+
+const Spinner = styled.img`
+width: 50px;
+height: 50px;
+`;
 
 export {
   DropDown,
@@ -271,5 +265,6 @@ export {
   Number,
   TextFooter,
   Title,
-  OptGroup,
+  Spinner,
+  ErrorMessage,
 };
