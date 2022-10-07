@@ -17,6 +17,7 @@ import {
   Title,
   ErrorMessage,
   Spinner,
+  CurveContainer
 } from "./styled";
 import { useNavigate } from "react-router-dom";
 import logo from "../../img/Logo_Sena.png";
@@ -126,7 +127,8 @@ const Lottery = (props) => {
           )}
         </InfoContainer>
       </ColorContainer>
-      <ResultsContainer>
+      <CurveContainer>
+        <ResultsContainer>
         <NumbersContainer>
           {draw !== undefined ? (
             draw.numeros.map((number) => {
@@ -144,7 +146,8 @@ const Lottery = (props) => {
           Este sorteio é meramente ilustrativo e não possui nenhuma ligação com
           a CAIXA.
         </TextFooter>
-      </ResultsContainer>
+        </ResultsContainer>
+      </CurveContainer>
     </MainContainer>
   );
 };

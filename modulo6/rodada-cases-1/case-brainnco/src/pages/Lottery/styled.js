@@ -150,18 +150,14 @@ const InfoText = styled.span`
   }
 `;
 
-const ResultsContainer = styled.div`
+const CurveContainer = styled.div`
   width: 70%;
-  bottom: 35%;
+  bottom: 20%;
   height: 140%;
   border-top-left-radius: 100%;
   border-bottom-left-radius: 100%;
   background-color: #efefef;
-  display: flex;
   position: relative;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 8%;
 
   @media screen and (max-width: 700px) {
     position: static;
@@ -176,24 +172,36 @@ const ResultsContainer = styled.div`
   }
 `;
 
+const ResultsContainer = styled.div`
+  width: 84%;
+  height: 100vh;
+  margin-top: 20%;
+  overflow: auto;
+  padding: 0 8%;
+  display:flex;
+  justify-content:center;
+  flex-direction: column;
+
+
+  @media screen and (max-width: 700px) {
+    margin-top: 40px;
+    width: 100%;
+    padding: 0;
+    height: 100%;
+  }
+`;
+
 const NumbersContainer = styled.div`
   width: 70%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin: auto auto 0 auto;
 
   @media screen and (max-width: 700px) {
-    padding-top: 10px;
+    padding-top: 30px;
     width: 90%;
-    margin: auto;
-    transform: none;
-    position: relative;
-    top: 0;
-    left: 0;
+    margin: 10px auto 0 auto;
   }
 `;
 
@@ -217,19 +225,16 @@ const TextFooter = styled.span`
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  position: absolute;
-  bottom: 30%;
-  left: 30%;
   color: #000000;
   text-align: center;
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
+  margin: auto auto 10% auto;
+  width: 50%;
 
   @media screen and (max-width: 700px) {
     padding: 3px 15px;
     line-height: 21px;
     font-size: 14px;
-    position: static;
-    bottom: 0;
+    width: 80%;
   }
 `;
 
@@ -266,4 +271,5 @@ export {
   Title,
   Spinner,
   ErrorMessage,
+  CurveContainer
 };
