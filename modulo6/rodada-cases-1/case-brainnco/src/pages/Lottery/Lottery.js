@@ -17,13 +17,13 @@ import {
   Title,
   ErrorMessage,
   Spinner
-} from "../styles/styled";
+} from "./styled";
 import { useNavigate } from "react-router-dom";
-import logo from "../img/Logo_Sena.png";
+import logo from "../../img/Logo_Sena.png";
 import axios from "axios";
-import { BASE_URL } from "../constants/links";
-import { colors } from "../constants/colors";
-import spinner from "../img/spinner.gif"
+import { BASE_URL } from "../../constants/links";
+import { colors } from "../../constants/colors";
+import spinner from "../../img/spinner.gif"
 
 const Lottery = (props) => {
   const [lotteries, setLotteries] = useState([]);

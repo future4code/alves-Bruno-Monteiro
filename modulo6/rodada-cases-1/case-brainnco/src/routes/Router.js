@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ErrorPage from "../errors/ErrorPage";
-import Lottery from "../pages/Lottery";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import Lottery from "../pages/Lottery/Lottery";
 
 export const Router = () => {
   return (
