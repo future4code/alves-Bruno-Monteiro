@@ -16,14 +16,14 @@ import {
   TextFooter,
   Title,
   ErrorMessage,
-  Spinner
+  Spinner,
 } from "./styled";
 import { useNavigate } from "react-router-dom";
 import logo from "../../img/Logo_Sena.png";
 import axios from "axios";
 import { BASE_URL } from "../../constants/links";
 import { colors } from "../../constants/colors";
-import spinner from "../../img/spinner.gif"
+import spinner from "../../img/spinner.gif";
 
 const Lottery = (props) => {
   const [lotteries, setLotteries] = useState([]);
@@ -87,7 +87,7 @@ const Lottery = (props) => {
   return (
     <MainContainer color={selectedColor}>
       <ColorContainer>
-      {errorMessage && <ErrorMessage> {errorMessage} </ErrorMessage>}
+        {errorMessage && <ErrorMessage> {errorMessage} </ErrorMessage>}
         {lotteries.length > 0 ? (
           <DropDown value={selectedLottery} onChange={onChangeLottery}>
             {lotteries.map((lottery) => {
@@ -99,20 +99,20 @@ const Lottery = (props) => {
             })}
           </DropDown>
         ) : (
-          <Spinner src={spinner} alt="loading"/>
+          <Spinner src={spinner} alt="loading" />
         )}
         <TitleContainer>
           <ImgLogo src={logo}></ImgLogo>
           {lotteries.length > 0 ? (
-          <Title>
-            {lotteries
-              .filter((lottery) => {
-                return lottery.id === parseInt(selectedLottery);
-              })[0]
-              .nome.toUpperCase()}
-          </Title>
+            <Title>
+              {lotteries
+                .filter((lottery) => {
+                  return lottery.id === parseInt(selectedLottery);
+                })[0]
+                .nome.toUpperCase()}
+            </Title>
           ) : (
-            <Spinner src={spinner} alt="loading"/>
+            <Spinner src={spinner} alt="loading" />
           )}
         </TitleContainer>
         <InfoContainer>
@@ -122,22 +122,23 @@ const Lottery = (props) => {
               {draw.id} - {new Date(draw.data).toLocaleDateString()}
             </InfoText>
           ) : (
-            <Spinner src={spinner} alt="loading"/>
+            <Spinner src={spinner} alt="loading" />
           )}
         </InfoContainer>
       </ColorContainer>
       <ResultsContainer>
         <NumbersContainer>
-          {draw !== undefined
-            ? draw.numeros.map((number) => {
-                return (
-                  <Circle>
-                    <Number>{number}</Number>
-                  </Circle>
-                );
-              })
-            : <Spinner src={spinner} alt="loading"/>
-            }
+          {draw !== undefined ? (
+            draw.numeros.map((number) => {
+              return (
+                <Circle>
+                  <Number>{number}</Number>
+                </Circle>
+              );
+            })
+          ) : (
+            <Spinner src={spinner} alt="loading" />
+          )}
         </NumbersContainer>
         <TextFooter>
           Este sorteio é meramente ilustrativo e não possui nenhuma ligação com

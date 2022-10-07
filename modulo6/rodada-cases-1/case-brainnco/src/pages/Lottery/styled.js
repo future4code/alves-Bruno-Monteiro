@@ -19,7 +19,7 @@ const DropDown = styled.select`
 `;
 
 const Option = styled.option`
- font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
@@ -29,7 +29,6 @@ const Option = styled.option`
     font-size: 20px;
   }
 `;
-
 
 const MainContainer = styled.div`
   width: 100%;
@@ -85,7 +84,7 @@ const ImgLogo = styled.img`
 `;
 
 const Title = styled.span`
- font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 30px;
@@ -123,7 +122,7 @@ const InfoContainer = styled.div`
 `;
 
 const InfoTitle = styled.span`
- font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -199,7 +198,7 @@ const NumbersContainer = styled.div`
 `;
 
 const Number = styled.span`
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 27px;
@@ -245,8 +244,8 @@ const ErrorMessage = styled.div`
 `;
 
 const Spinner = styled.img`
-width: 50px;
-height: 50px;
+  width: 50px;
+  height: 50px;
 `;
 
 export {
