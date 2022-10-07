@@ -1,8 +1,8 @@
-# Brainnco Front-end challenge 🍀
+# Brainnco Front-End Challenge 🍀
 
 ## 🚀 Descrição do Projeto
 
-O projeto é um case proposto pela empresa Brainnco. Aplicação Front-End Web que renderiza diferentes resultados das loterias.
+O projeto é um case proposto pela empresa Brainnco e simula uma aplicação Web Front-End que renderiza diferentes resultados das loterias da Caixa.
 
 ## 📋 Funcionalidades
 
@@ -12,8 +12,10 @@ O projeto é um case proposto pela empresa Brainnco. Aplicação Front-End Web q
 - A aplicação é responsiva para mobile.
 
 ## 🔗 Link para visualização do site (SURGE)
-plucky-shock.surge.sh
-#### Desktop:
+[healthy-punishment.surge.sh](https://healthy-punishment.surge.sh/)
+
+
+## 💻 Desktop:
 ![error_ocurred](https://user-images.githubusercontent.com/104601906/194668647-3bb62624-68f4-400d-be35-36363c994c9c.png)
 
 ![spinner_loading](https://user-images.githubusercontent.com/104601906/194668651-d8972164-93b1-43f9-a1a6-93f8513af5f4.png)
@@ -24,11 +26,12 @@ plucky-shock.surge.sh
 
 ![errorpage](https://user-images.githubusercontent.com/104601906/194668721-3e4f703c-d8df-4a2d-b41e-4d090b120c0a.png)
 
+## 📱 Mobile:
+<img width="284" alt="mobile" src="https://user-images.githubusercontent.com/104601906/194669763-c9017d9b-4c38-4f41-9c67-727640db6ac8.png">
 
-#### Mobile:
 
 
-### 🔧 Getting Started / Configurações de Ambiente / Setup / Instalação
+### 🔧 Configurações de Ambiente / Instalação
 
 Para rodar o projeto na máquina local é necessário a instalação do node js:
 * [Node.js](https://nodejs.org/en/) / Use a versão <i>16.17.0 LTS</i>
@@ -55,6 +58,7 @@ https://github.com/brainnco-exs/readme-frontend
 
 
 ## AUTOR
+
 Bruno Monteiro  | https://github.com/Brunomon2812
 --------- | ------
-[<img src="https://github.com/Brunomon2812" width="75px;"/>](https://github.com/Brunomon2812) | [Bruno Monteiro](https://github.com/Brunomon2812)
+[<img src="https://avatars.githubusercontent.com/Brunomon2812" width="75px;"/>](https://github.com/Brunomon2812) | [Bruno Monteiro](https://github.com/Brunomon2812)
