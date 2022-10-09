@@ -12,7 +12,7 @@ O projeto é um case proposto pela empresa Brainnco e simula uma aplicação Web
 - A aplicação é responsiva para mobile.
 
 ## 🔗 Link para visualização do site (SURGE)
-[healthy-punishment.surge.sh](https://healthy-punishment.surge.sh/)
+[nutritious-summer.surge.sh/](https://nutritious-summer.surge.sh/)
 
 
 ## 💻 Desktop:
