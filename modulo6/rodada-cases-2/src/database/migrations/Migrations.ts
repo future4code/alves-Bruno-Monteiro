@@ -1,6 +1,5 @@
 import { BaseDatabase } from "../BaseDatabase"
-import { UserDatabase } from "../UserDatabase"
-import { users } from "./data"
+import { PizzaDatabase, UserDatabase } from "../PizzaDatabase"
 
 class Migrations extends BaseDatabase {
     execute = async () => {
@@ -28,22 +27,48 @@ class Migrations extends BaseDatabase {
 
     createTables = async () => {
         await BaseDatabase.connection.raw(`
-        DROP TABLE IF EXISTS ${UserDatabase.TABLE_USERS};
-        
-        CREATE TABLE IF NOT EXISTS ${UserDatabase.TABLE_USERS}(
+   
+        DROP TABLE IF EXISTS Amb_Order_Items ;
+        DROP TABLE IF EXISTS Amb_Orders;
+        DROP TABLE IF EXISTS ${PizzaDatabase.TABLE_PIZZAS_INGREDIENTS};
+        DROP TABLE IF EXISTS ${PizzaDatabase.TABLE_INGREDIENTS};
+        DROP TABLE IF EXISTS ${PizzaDatabase.TABLE_PIZZAS};
+
+        CREATE TABLE IF NOT EXISTS Amb_Pizzas(
+            name VARCHAR(255) PRIMARY KEY,
+            price DECIMAL(3,2) NOT NULL
+            );
+            
+            CREATE TABLE IF NOT EXISTS Amb_Ingredients(
+            name VARCHAR(255) PRIMARY KEY
+            );
+            
+            CREATE TABLE IF NOT EXISTS Amb_Pizzas_Ingredients(
+            pizza_name VARCHAR(255) NOT NULL,
+            ingredient_name VARCHAR(255) NOT NULL,
+            FOREIGN KEY (pizza_name) REFERENCES Amb_Pizzas (name),
+            FOREIGN KEY (ingredient_name) REFERENCES Amb_Ingredients (name)
+            );
+            
+            CREATE TABLE IF NOT EXISTS Amb_Orders (
+                id VARCHAR(255) PRIMARY KEY
+            );
+            
+            CREATE TABLE IF NOT EXISTS Amb_Order_Items (
             id VARCHAR(255) PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-            email VARCHAR(255) NOT NULL UNIQUE,
-            password VARCHAR(255) NOT NULL,
-            role ENUM("NORMAL", "ADMIN") DEFAULT "NORMAL" NOT NULL
-        );
+            pizza_name VARCHAR(255) NOT NULL,
+            quantity TINYINT,
+            order_id VARCHAR(255) NOT NULL,
+            FOREIGN KEY (pizza_name) REFERENCES Amb_Pizzas (name),
+            FOREIGN KEY (order_id) REFERENCES Amb_Orders (id)
+            );
         `)
     }
 
     insertData = async () => {
-        await BaseDatabase
-            .connection(UserDatabase.TABLE_USERS)
-            .insert(users)
+        // await BaseDatabase
+        //     .connection(UserDatabase.TABLE_USERS)
+        //     .insert(users)
     }
 }
 
