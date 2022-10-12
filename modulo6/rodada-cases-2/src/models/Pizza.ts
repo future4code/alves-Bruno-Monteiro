@@ -55,3 +55,12 @@ export class Pizza {
         return this.ingredients.filter((ingredient) => ingredient !== ingredientToRemove)
     }
 }
+
+export interface IGetPizzasOutputDTO {
+    message: string
+    pizzas: {
+        name: string,
+        price: number,
+        ingredients: string []
+    }
+}
