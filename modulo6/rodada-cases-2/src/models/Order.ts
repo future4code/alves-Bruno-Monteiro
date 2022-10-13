@@ -1,30 +1,51 @@
-export interface IOrdersDB{
+export interface IOrderDB {
     id: string
-  }
+}
 
-  export interface IOrderItemsDB{
+export interface IOrderItemDB { 
     id: string,
-    pizza_name: string, 
+    pizza_name: string,
     quantity: number,
-    order_id:string,
-    
-  }
+    order_id: string
+}
 
-  export interface IOrderItem{
+export interface IOrderItem {
     id: string,
-    pizza_name: string, 
+    pizza_name: string,
+    price: number,
     quantity: number,
-    order_id:string,
-    
-  }
+    order_id: string
+}
 
+export interface IOrderResume {
+    id: string,
+    pizzas: {
+        name: string,
+        quantity: number,
+        price: number
+    }[],
+    total: number
+}
 
-  export class Order {
+export class Order {
+    private total: number = 0
+
     constructor(
         private id: string,
-        private orderItems:IOrderItem [],
-    ) {}
+        private orderItems: IOrderItem[],
+    ) {
+        this.total = this.calculateTotal()
+    }
 
+    private calculateTotal = () => {
+        const total = this.orderItems.reduce(
+            (acc, pizza) => acc + (pizza.price * pizza.quantity),
+            0
+        )
+
+        return total
+    }
+    
     public getId = () => {
         return this.id
     }
@@ -33,11 +54,9 @@ export interface IOrdersDB{
         return this.orderItems
     }
 
-
     public setOrderItems = (newOrderItems: IOrderItem[]) => {
         this.orderItems = newOrderItems
     }
-
 
     public addOrderItem = (newOrderItem: IOrderItem) => {
         this.orderItems.push(newOrderItem)
@@ -46,4 +65,24 @@ export interface IOrdersDB{
     public removeOrderItem = (idToRemove: string) => {
         return this.orderItems.filter(orderItem => orderItem.id !== idToRemove)
     }
+
+    public getTotal = () => {
+        return this.total
+    }
+}
+
+export interface ICreateOrderInputDTO {
+    pizzas: {
+        name: string,
+        quantity: number
+    }[]
+}
+
+export interface ICreateOrderOutputDTO {
+    message: string,
+    order: IOrderResume
+}
+
+export interface IGetOrdersOutputDTO {
+    orders: IOrderResume[]
 }

@@ -1,31 +1,48 @@
+import { IOrderDB, IOrderItemDB } from "../models/Order"
 import { BaseDatabase } from "./BaseDatabase"
-import { IPizzaDB,Pizza } from "../models/Pizza"
+import { PizzaDatabase } from "./PizzaDatabase"
 
 export class OrderDatabase extends BaseDatabase {
     public static TABLE_ORDERS = "Amb_Orders"
     public static TABLE_ORDER_ITEMS = "Amb_Order_Items"
 
-    public toPizzaDBModel = (pizza: Pizza): IPizzaDB => {
-        return {
-            name: pizza.getName(),
-            price: pizza.getPrice()
-        }        
+    public createOrder = async (orderId: string): Promise<void> => {
+        await BaseDatabase
+            .connection(OrderDatabase.TABLE_ORDERS)
+            .insert({
+                id: orderId
+            })
     }
 
-    // public findByEmail = async (email: string): Promise<IUserDB | undefined> => {
-    //     const result: IUserDB[] = await BaseDatabase
-    //         .connection(UserDatabase.TABLE_USERS)
-    //         .select()
-    //         .where({ email })
+    public insertItemOnOrder = async (orderItem: IOrderItemDB): Promise<void> => {
+        await BaseDatabase
+            .connection(OrderDatabase.TABLE_ORDER_ITEMS)
+            .insert(orderItem)
+    }
 
-    //     return result[0]
-    // }
+    public getPrice = async (pizzaName: string): Promise<number | undefined> => {
+        const result: any[] = await BaseDatabase
+            .connection(PizzaDatabase.TABLE_PIZZAS)
+            .select("price")
+            .where({ name: pizzaName })
+    
+        return result[0].price as number
+    }
 
-    // public createUser = async (user: User): Promise<void> => {
-    //     const userDB = this.toUserDBModel(user)
+    public getOrders = async (): Promise<IOrderDB[]> => {
+        const result: IOrderDB[] = await BaseDatabase
+            .connection(OrderDatabase.TABLE_ORDERS)
+            .select()
 
-    //     await BaseDatabase
-    //         .connection(UserDatabase.TABLE_USERS)
-    //         .insert(userDB)
-    // }
+        return result
+    }
+
+    public getOrderItem = async (orderId: string): Promise<IOrderItemDB[]> => {
+        const result: IOrderItemDB[] = await BaseDatabase
+            .connection(OrderDatabase.TABLE_ORDER_ITEMS)
+            .select()
+            .where({ order_id: orderId })
+
+        return result
+    }
 }
