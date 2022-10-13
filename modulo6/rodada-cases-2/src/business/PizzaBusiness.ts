@@ -40,4 +40,32 @@ export class PizzaBusiness {
 
         return response
     }
+
+    public getPizzasV2 = async () => {
+
+        const rawPizzasFormatted = await this.pizzaDatabase.getPizzasFormatted()
+
+        const pizzas: any = []
+
+        for (let rawPizza of rawPizzasFormatted) {
+            const pizzaAlreadyOnArray = pizzas
+                .find((pizza: any) => pizza.name === rawPizza.name)
+
+            if (pizzaAlreadyOnArray) {
+                pizzaAlreadyOnArray.ingredients.push(rawPizza.ingredient_name)
+            } else {
+                const pizza = {
+                    name: rawPizza.name,
+                    price: rawPizza.price,
+                    ingredients: [ rawPizza.ingredient_name ]
+                }
+
+                pizzas.push(pizza)
+            }
+        }
+
+        return {
+            pizzas
+        }
+    }
 }

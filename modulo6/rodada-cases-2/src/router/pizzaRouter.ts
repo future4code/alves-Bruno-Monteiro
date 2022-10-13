@@ -8,11 +8,10 @@ export const pizzaRouter = Router()
 
 const pizzaController = new PizzaController(
     new PizzaBusiness(
-            new PizzaDatabase(),
-            new IdGenerator
-        )
+        new PizzaDatabase(),
+        new IdGenerator()
     )
-
+)
 
 pizzaRouter.get("/", pizzaController.getPizzas)
-   
+pizzaRouter.get("/v2", pizzaController.getPizzasV2)

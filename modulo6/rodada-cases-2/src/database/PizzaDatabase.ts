@@ -30,6 +30,16 @@ export class PizzaDatabase extends BaseDatabase {
         return result.map(item => item.ingredient_name)
     }
 
+    public getPizzasFormatted = async (): Promise<any> => {
+        const [result] = await BaseDatabase
+            .connection.raw(`
+                SELECT * FROM Amb_Pizzas
+                JOIN Amb_Pizzas_Ingredients ON Amb_Pizzas_Ingredients.pizza_name = Amb_Pizzas.name;
+            `)
+
+            return result
+    }
+
     // public createUser = async (user: User): Promise<void> => {
     //     const userDB = this.toUserDBModel(user)
 
