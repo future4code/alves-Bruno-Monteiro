@@ -1,5 +1,5 @@
-import { BaseDatabase } from "../BaseDatabase"
-import { IPizzaDB,Pizza } from "../../models/Pizza"
+import { BaseDatabase } from "./BaseDatabase"
+import { IPizzaDB,Pizza } from "../models/Pizza"
 
 export class OrderDatabase extends BaseDatabase {
     public static TABLE_ORDERS = "Amb_Orders"

@@ -4,7 +4,7 @@ import { BaseDatabase } from "./BaseDatabase"
 export class PizzaDatabase extends BaseDatabase {
     public static TABLE_PIZZAS = "Amb_Pizzas"
     public static TABLE_INGREDIENTS = "Amb_Ingredients"
-    public static TABLE_PIZZAS_INGREDIENTS = "Amb_PizzaS_Ingredients"
+    public static TABLE_PIZZAS_INGREDIENTS = "Amb_Pizzas_Ingredients"
 
     public toPizzaDBModel = (pizza: Pizza): IPizzaDB => {
         return {
@@ -24,10 +24,10 @@ export class PizzaDatabase extends BaseDatabase {
     public getIngredients = async (pizzaName: string): Promise<string[]> => {
         const result: IPizzasIngredientsDB[] = await BaseDatabase
             .connection(PizzaDatabase.TABLE_PIZZAS_INGREDIENTS)
-            .select()
+            .select("ingredient_name")
             .where({ pizza_name: pizzaName })
 
-        return result
+        return result.map(item => item.ingredient_name)
     }
 
     // public createUser = async (user: User): Promise<void> => {

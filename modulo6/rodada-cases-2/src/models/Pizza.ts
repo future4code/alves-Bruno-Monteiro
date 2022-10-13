@@ -1,17 +1,16 @@
-export interface IPizzaDB{
-  name: string
-  price: number
+export interface IPizzaDB {
+    name: string,
+    price: number
 }
 
-export interface IIngredientsDB{
+export interface IIngredientsDB {
     name: string
 }
 
-export interface IPizzasIngredientsDB{
-    pizza_name: string
+export interface IPizzasIngredientsDB {
+    pizza_name: string,
     ingredient_name: string
- }
-
+}
 
 export class Pizza {
     constructor(
@@ -19,7 +18,7 @@ export class Pizza {
         private price: number,
         private ingredients: string[]
     ) {}
-
+    
     public getName = () => {
         return this.name
     }
@@ -28,16 +27,13 @@ export class Pizza {
         return this.price
     }
 
-
-    public getIngredients= () => {
+    public getIngredients = () => {
         return this.ingredients
     }
-
 
     public setName = (newName: string) => {
         this.name = newName
     }
-
 
     public setPrice = (newPrice: number) => {
         this.price = newPrice
@@ -52,15 +48,15 @@ export class Pizza {
     }
 
     public removeIngredient = (ingredientToRemove: string) => {
-        return this.ingredients.filter((ingredient) => ingredient !== ingredientToRemove)
+        return this.ingredients.filter(ingredient => ingredient !== ingredientToRemove)
     }
 }
 
 export interface IGetPizzasOutputDTO {
-    message: string
+    message: string,
     pizzas: {
         name: string,
         price: number,
-        ingredients: string []
-    }
+        ingredients: string[]
+    }[]
 }
