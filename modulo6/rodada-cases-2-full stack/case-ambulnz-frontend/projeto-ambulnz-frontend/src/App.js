@@ -28,8 +28,7 @@ function App() {
     }, [cart])
 
     const addToCart = (pizzaToAdd) => {
-        // -1 se a pizza não existir
-        // 0 pra cima se ela existir
+
         const foundIndex = cart.findIndex((pizzaInCart) => {
             return pizzaInCart.name === pizzaToAdd.name
         })
@@ -54,12 +53,7 @@ function App() {
     }
 
     const removeFromCart = (pizzaToRemove) => {
-        // se a pizza possuir quantidade maior que 1
-        //  remover 1 da quantidade
-
-        // senao
-        //  remover o item inteiro do carrinho
-
+      
         if (pizzaToRemove.quantity > 1) {
             const newCart = cart.map((pizza) => {
                 if (pizza.name === pizzaToRemove.name) {
