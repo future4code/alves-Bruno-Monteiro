@@ -19,3 +19,11 @@ Content-Type: application/json
     "email": "astrodev@gmail.com",
     "password": "bananinha"
 }
+
+### Get products 
+GET http://localhost:3003/products?order=name&sort=asc
+
+
+### Search products 
+GET http://localhost:3003/products?search=8310
+
