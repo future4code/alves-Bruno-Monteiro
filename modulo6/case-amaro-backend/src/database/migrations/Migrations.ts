@@ -1,6 +1,7 @@
 import { BaseDatabase } from "../BaseDatabase"
 import { UserDatabase } from "../UserDatabase"
-import { users } from "./data"
+import { ProductDatabase } from "../ProductDatabase"
+import { products, tags, tagsProducts, users } from "./data"
 
 class Migrations extends BaseDatabase {
     execute = async () => {
@@ -28,22 +29,55 @@ class Migrations extends BaseDatabase {
 
     createTables = async () => {
         await BaseDatabase.connection.raw(`
-        DROP TABLE IF EXISTS ${UserDatabase.TABLE_USERS};
+        DROP TABLE IF EXISTS ${ProductDatabase.Amaro_Tags_Products};
+        DROP TABLE IF EXISTS ${ProductDatabase.Amaro_Tags};
+        DROP TABLE IF EXISTS ${ProductDatabase.Amaro_Products};
+        DROP TABLE IF EXISTS ${UserDatabase.Amaro_Users};
         
-        CREATE TABLE IF NOT EXISTS ${UserDatabase.TABLE_USERS}(
+        CREATE TABLE IF NOT EXISTS ${UserDatabase.Amaro_Users}(
             id VARCHAR(255) PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             email VARCHAR(255) NOT NULL UNIQUE,
-            password VARCHAR(255) NOT NULL,
-            role ENUM("NORMAL", "ADMIN") DEFAULT "NORMAL" NOT NULL
+            password VARCHAR(255) NOT NULL
         );
+
+        CREATE TABLE IF NOT EXISTS ${ProductDatabase.Amaro_Products}(
+            id VARCHAR(255) PRIMARY KEY,
+            name VARCHAR(255) NOT NULL
+        );
+        
+        CREATE TABLE IF NOT EXISTS ${ProductDatabase.Amaro_Tags}(
+            id VARCHAR(255) PRIMARY KEY,
+            tag VARCHAR(255) NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS ${ProductDatabase.Amaro_Tags_Products}(
+            id VARCHAR(255) PRIMARY KEY,
+            product_id VARCHAR(255) NOT NULL,
+            tag_id VARCHAR(255) NOT NULL,
+            FOREIGN KEY (product_id) REFERENCES ${ProductDatabase.Amaro_Products}(id),
+            FOREIGN KEY (tag_id) REFERENCES ${ProductDatabase.Amaro_Tags}(id)
+        );
+
         `)
     }
 
     insertData = async () => {
         await BaseDatabase
-            .connection(UserDatabase.TABLE_USERS)
+            .connection(UserDatabase.Amaro_Users)
             .insert(users)
+
+            await BaseDatabase
+            .connection(ProductDatabase.Amaro_Products)
+            .insert(products)
+
+        await BaseDatabase
+            .connection(ProductDatabase.Amaro_Tags)
+            .insert(tags)
+
+        await BaseDatabase
+            .connection(ProductDatabase.Amaro_Tags_Products)
+            .insert(tagsProducts)
     }
 }
 
