@@ -2,7 +2,7 @@ import { IUserDB, User } from "../models/User"
 import { BaseDatabase } from "./BaseDatabase"
 
 export class UserDatabase extends BaseDatabase {
-    public static TABLE_USERS = "Template_Users"
+    public static Amaro_Users = "Amaro_Users"
 
     public toUserDBModel = (user: User): IUserDB => {
         const userDB: IUserDB = {
@@ -10,7 +10,6 @@ export class UserDatabase extends BaseDatabase {
             name: user.getName(),
             email: user.getEmail(),
             password: user.getPassword(),
-            role: user.getRole()
         }
 
         return userDB
@@ -18,7 +17,7 @@ export class UserDatabase extends BaseDatabase {
 
     public findByEmail = async (email: string): Promise<IUserDB | undefined> => {
         const result: IUserDB[] = await BaseDatabase
-            .connection(UserDatabase.TABLE_USERS)
+            .connection(UserDatabase.Amaro_Users)
             .select()
             .where({ email })
 
@@ -29,7 +28,7 @@ export class UserDatabase extends BaseDatabase {
         const userDB = this.toUserDBModel(user)
 
         await BaseDatabase
-            .connection(UserDatabase.TABLE_USERS)
+            .connection(UserDatabase.Amaro_Users)
             .insert(userDB)
     }
 }

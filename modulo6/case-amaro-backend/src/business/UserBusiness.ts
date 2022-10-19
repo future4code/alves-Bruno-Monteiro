@@ -2,7 +2,7 @@ import { UserDatabase } from "../database/UserDatabase"
 import { NotFoundError } from "../errors/NotFoundError"
 import { ConflictError} from "../errors/ConflictError"
 import { ParamsError} from "../errors/ParamsError"
-import { ILoginInputDTO, ILoginOutputDTO, ISignupInputDTO, ISignupOutputDTO, User, USER_ROLES } from "../models/User"
+import { ILoginInputDTO, ILoginOutputDTO, ISignupInputDTO, ISignupOutputDTO, User, } from "../models/User"
 import { Authenticator, ITokenPayload } from "../services/Authenticator"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
@@ -57,14 +57,13 @@ export class UserBusiness {
             name,
             email,
             hashedPassword,
-            USER_ROLES.NORMAL
+    
         )
 
         await this.userDatabase.createUser(user)
 
         const payload: ITokenPayload = {
-            id: user.getId(),
-            role: user.getRole()
+            id: user.getId()
         }
 
         const token = this.authenticator.generateToken(payload)
@@ -107,7 +106,6 @@ export class UserBusiness {
             userDB.name,
             userDB.email,
             userDB.password,
-            userDB.role
         )
 
         const isPasswordCorrect = await this.hashManager.compare(
@@ -120,8 +118,7 @@ export class UserBusiness {
         }
 
         const payload: ITokenPayload = {
-            id: user.getId(),
-            role: user.getRole()
+            id: user.getId()
         }
 
         const token = this.authenticator.generateToken(payload)

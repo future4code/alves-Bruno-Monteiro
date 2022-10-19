@@ -1,6 +1,7 @@
 export interface IProductDB {
     id: string,
     name: string
+   
 }
 
 export interface ITagsDB {
