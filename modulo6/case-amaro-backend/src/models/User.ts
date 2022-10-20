@@ -1,16 +1,25 @@
+export enum USER_ROLES {
+    NORMAL = "NORMAL",
+    ADMIN = "ADMIN"
+}
 export interface IUserDB {
     id: string,
     name: string,
     email: string,
     password: string,
+    role: USER_ROLES
 }
 
 export class User {
+    getRole(): USER_ROLES {
+        throw new Error("Method not implemented.")
+    }
     constructor(
         private id: string,
         private name: string,
         private email: string,
         private password: string,
+        private role: USER_ROLES
     ) {}
 
     public getId = () => {
@@ -43,6 +52,10 @@ export class User {
 
     public setPassword = (newPassword: string) => {
         this.password = newPassword
+    }
+
+    public setRole = (newRole: USER_ROLES) => {
+        this.role = newRole
     }
 }
 

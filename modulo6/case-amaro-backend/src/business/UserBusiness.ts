@@ -1,12 +1,12 @@
 import { UserDatabase } from "../database/UserDatabase"
+import { ConflictError } from "../errors/ConflictError"
 import { NotFoundError } from "../errors/NotFoundError"
-import { ConflictError} from "../errors/ConflictError"
-import { ParamsError} from "../errors/ParamsError"
-import { ILoginInputDTO, ILoginOutputDTO, ISignupInputDTO, ISignupOutputDTO, User, } from "../models/User"
+import { RequestError } from "../errors/RequestError"
+import { UnauthorizedError } from "../errors/UnauthorizedError"
+import { ILoginInputDTO, ILoginOutputDTO, ISignupInputDTO, ISignupOutputDTO, User, USER_ROLES } from "../models/User"
 import { Authenticator, ITokenPayload } from "../services/Authenticator"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
-import { AuthenticationError } from "../errors/AuthenticationError"
 
 export class UserBusiness {
     constructor(
@@ -16,89 +16,90 @@ export class UserBusiness {
         private authenticator: Authenticator
     ) {}
 
-    public signup = async (input: ISignupInputDTO): Promise<ISignupOutputDTO> => {
+    public signup = async (input: ISignupInputDTO) => {
         const { name, email, password } = input
 
         if (typeof name !== "string") {
-            throw new ParamsError("Parâmetro 'name' inválido: deve ser uma string")
+            throw new RequestError("Parâmetro 'name' inválido: deve ser uma string")
         }
 
         if (typeof email !== "string") {
-            throw new ParamsError("Parâmetro 'email' inválido: deve ser uma string")
+            throw new RequestError("Parâmetro 'email' inválido: deve ser uma string")
         }
 
         if (typeof password !== "string") {
-            throw new ParamsError("Parâmetro 'password' inválido: deve ser uma string")
+            throw new RequestError("Parâmetro 'password' inválido: deve ser uma string")
         }
 
         if (name.length < 3) {
-            throw new ParamsError("Parâmetro 'name' inválido: mínimo de 3 caracteres")
+            throw new RequestError("Parâmetro 'name' inválido: mínimo de 3 caracteres")
         }
 
         if (password.length < 6) {
-            throw new ParamsError("Parâmetro 'password' inválido: mínimo de 6 caracteres")
+            throw new RequestError("Parâmetro 'password' inválido: mínimo de 6 caracteres")
         }
 
         if (!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
-            throw new ParamsError("Parâmetro 'email' inválido")
+            throw new RequestError("Invalid 'email' parameter")
         }
 
         const isEmailAlreadyExists = await this.userDatabase.findByEmail(email)
         
         if (isEmailAlreadyExists) {
-            throw new ConflictError("Email já cadastrado")
+            throw new ConflictError("E-mail already registered")
         }
 
         const id = this.idGenerator.generate()
         const hashedPassword = await this.hashManager.hash(password)
 
         const user = new User(
-            id,
+            id, 
             name,
             email,
             hashedPassword,
-    
+            USER_ROLES.NORMAL
         )
 
         await this.userDatabase.createUser(user)
 
         const payload: ITokenPayload = {
             id: user.getId()
+            
         }
 
         const token = this.authenticator.generateToken(payload)
 
         const response: ISignupOutputDTO = {
-            message: "Cadastro realizado com sucesso",
+            message: "Cadastro realizado com sucesso!",
             token
         }
 
         return response
     }
 
-    public login = async (input: ILoginInputDTO): Promise<ILoginOutputDTO> => {
+    public login = async (input: ILoginInputDTO) => {
         const { email, password } = input
 
         if (typeof email !== "string") {
-            throw new ParamsError("Parâmetro 'email' inválido")
+            throw new RequestError("Parâmetro 'email' deve ser do tipo 'string.'")
         }
 
         if (typeof password !== "string") {
-            throw new ParamsError("Parâmetro 'password' inválido")
+            throw new RequestError("Parâmetro 'password' deve ser do tipo 'string.'")
         }
 
         if (password.length < 6) {
-            throw new ParamsError("Parâmetro 'password' inválido: mínimo de 6 caracteres")
+            throw new RequestError("Parâmetro 'password' deve ter ao menos 6 caracteres")
         }
 
         if (!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
-            throw new ParamsError("Parâmetro 'email' inválido")
+            throw new RequestError("Invalid 'email' parameter")
         }
 
         const userDB = await this.userDatabase.findByEmail(email)
         
         if (!userDB) {
-            throw new NotFoundError("Email não cadastrado")
+            throw new NotFoundError("E-mail não cadastrado no sistema!")
         }
 
         const user = new User(
@@ -106,6 +107,7 @@ export class UserBusiness {
             userDB.name,
             userDB.email,
             userDB.password,
+            userDB.role
         )
 
         const isPasswordCorrect = await this.hashManager.compare(
@@ -114,7 +116,7 @@ export class UserBusiness {
         )
 
         if (!isPasswordCorrect) {
-            throw new AuthenticationError("Password incorreto")
+            throw new UnauthorizedError("Erro: password incorreto!")
         }
 
         const payload: ITokenPayload = {
@@ -124,7 +126,7 @@ export class UserBusiness {
         const token = this.authenticator.generateToken(payload)
 
         const response: ILoginOutputDTO = {
-            message: "Login realizado com sucesso",
+            message: "Login realizado com sucesso!",
             token
         }
 

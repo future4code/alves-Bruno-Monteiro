@@ -1,17 +1,19 @@
 export class HashManagerMock {
     public hash = async (plaintext: string): Promise<string> => {
-        if (plaintext == "bananinha") {
-            return "hash-bananinha"
+        switch(plaintext) {
+            case "bananinha":
+                return "$2a$12$RBAWOHpUvGTE.MEeIohAzec9tlVqtNA/x2PMPt/Hrt0vI437cQdJC"
+            default:
+                return "hash-mock"
         }
-
-        return "hash-mock"
     }
 
-    public compare = async (plaintext: string, hash: string): Promise<boolean> => {
-        if (plaintext == "bananinha" && hash == "hash-bananinha") {
-            return true
+    public compare = async (plaintext: string, hash: string): Promise<boolean>  => {
+        switch(plaintext) {
+            case "bananinha":
+                return hash === "$2a$12$RBAWOHpUvGTE.MEeIohAzec9tlVqtNA/x2PMPt/Hrt0vI437cQdJC"
+            default:
+                return false
         }
-
-        return false
     }
 }

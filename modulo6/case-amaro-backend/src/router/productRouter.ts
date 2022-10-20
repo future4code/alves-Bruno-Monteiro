@@ -16,6 +16,6 @@ const productController = new ProductController(
     )
 )
 
-productRouter.get("/", productController.getProduct)
+productRouter.get("/", productController.getProducts)
 productRouter.get("/", productController.searchProduct)
-productRouter.post("/", productController.creatProduct)
+productRouter.post("/", productController.createProduct)

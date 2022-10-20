@@ -3,9 +3,9 @@ import { BaseDatabase } from "./BaseDatabase";
 
 
 export class ProductDatabase extends BaseDatabase {
-    public static Amaro_Products =  "Amaro_Products"
-    public static TABLE_Amaro_TagsTAGS = "Amaro_Tags"
-    public static Amaro_Tags_Products = "Amaro_Tags_Products"
+    public static Amaro_Products = "Amaro_Products"
+    public static Amaro_Tags ="Amaro_Tags"
+    public static Amaro_Tags_Products ="Amaro_Tags_Products"
 
     public getProducts = async (input: IGetProductsDB): Promise<IProductDB[] | undefined> => {
         const {
