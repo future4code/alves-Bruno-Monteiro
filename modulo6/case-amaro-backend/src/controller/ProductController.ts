@@ -31,7 +31,7 @@ export class ProductController {
     public createProduct = async (req: Request, res: Response) => {
         try {
             const input = {
-                token: req.headers.authorization,
+                token: req.headers.authorization as string,
                 name: req.body.name,
                 tags: req.body.tags
             }

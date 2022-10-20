@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const BaseDatabase_1 = require("../BaseDatabase");
 const UserDatabase_1 = require("../UserDatabase");
+const ProductDatabase_1 = require("../ProductDatabase");
 const data_1 = require("./data");
 class Migrations extends BaseDatabase_1.BaseDatabase {
     constructor() {
@@ -30,21 +31,51 @@ class Migrations extends BaseDatabase_1.BaseDatabase {
         };
         this.createTables = async () => {
             await BaseDatabase_1.BaseDatabase.connection.raw(`
-        DROP TABLE IF EXISTS ${UserDatabase_1.UserDatabase.TABLE_USERS};
+        DROP TABLE IF EXISTS ${ProductDatabase_1.ProductDatabase.Amaro_Tags_Products};
+        DROP TABLE IF EXISTS ${ProductDatabase_1.ProductDatabase.Amaro_Tags};
+        DROP TABLE IF EXISTS ${ProductDatabase_1.ProductDatabase.Amaro_Products};
+        DROP TABLE IF EXISTS ${UserDatabase_1.UserDatabase.Amaro_Users};
         
-        CREATE TABLE IF NOT EXISTS ${UserDatabase_1.UserDatabase.TABLE_USERS}(
+        CREATE TABLE IF NOT EXISTS ${UserDatabase_1.UserDatabase.Amaro_Users}(
             id VARCHAR(255) PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             email VARCHAR(255) NOT NULL UNIQUE,
-            password VARCHAR(255) NOT NULL,
-            role ENUM("NORMAL", "ADMIN") DEFAULT "NORMAL" NOT NULL
+            password VARCHAR(255) NOT NULL
         );
+
+        CREATE TABLE IF NOT EXISTS ${ProductDatabase_1.ProductDatabase.Amaro_Products}(
+            id VARCHAR(255) PRIMARY KEY,
+            name VARCHAR(255) NOT NULL
+        );
+        
+        CREATE TABLE IF NOT EXISTS ${ProductDatabase_1.ProductDatabase.Amaro_Tags}(
+            id VARCHAR(255) PRIMARY KEY,
+            tag VARCHAR(255) NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS ${ProductDatabase_1.ProductDatabase.Amaro_Tags_Products}(
+            id VARCHAR(255) PRIMARY KEY,
+            product_id VARCHAR(255) NOT NULL,
+            tag_id VARCHAR(255) NOT NULL,
+            FOREIGN KEY (product_id) REFERENCES ${ProductDatabase_1.ProductDatabase.Amaro_Products}(id),
+            FOREIGN KEY (tag_id) REFERENCES ${ProductDatabase_1.ProductDatabase.Amaro_Tags}(id)
+        );
+
         `);
         };
         this.insertData = async () => {
             await BaseDatabase_1.BaseDatabase
-                .connection(UserDatabase_1.UserDatabase.TABLE_USERS)
+                .connection(UserDatabase_1.UserDatabase.Amaro_Users)
                 .insert(data_1.users);
+            await BaseDatabase_1.BaseDatabase
+                .connection(ProductDatabase_1.ProductDatabase.Amaro_Products)
+                .insert(data_1.products);
+            await BaseDatabase_1.BaseDatabase
+                .connection(ProductDatabase_1.ProductDatabase.Amaro_Tags)
+                .insert(data_1.tags);
+            await BaseDatabase_1.BaseDatabase
+                .connection(ProductDatabase_1.ProductDatabase.Amaro_Tags_Products)
+                .insert(data_1.tagsProducts);
         };
     }
 }

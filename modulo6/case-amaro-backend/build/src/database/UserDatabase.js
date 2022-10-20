@@ -17,7 +17,7 @@ class UserDatabase extends BaseDatabase_1.BaseDatabase {
         };
         this.findByEmail = async (email) => {
             const result = await BaseDatabase_1.BaseDatabase
-                .connection(UserDatabase.TABLE_USERS)
+                .connection(UserDatabase.Amaro_Users)
                 .select()
                 .where({ email });
             return result[0];
@@ -25,11 +25,11 @@ class UserDatabase extends BaseDatabase_1.BaseDatabase {
         this.createUser = async (user) => {
             const userDB = this.toUserDBModel(user);
             await BaseDatabase_1.BaseDatabase
-                .connection(UserDatabase.TABLE_USERS)
+                .connection(UserDatabase.Amaro_Users)
                 .insert(userDB);
         };
     }
 }
 exports.UserDatabase = UserDatabase;
-UserDatabase.TABLE_USERS = "Template_Users";
+UserDatabase.Amaro_Users = "Amaro_Users";
 //# sourceMappingURL=UserDatabase.js.map

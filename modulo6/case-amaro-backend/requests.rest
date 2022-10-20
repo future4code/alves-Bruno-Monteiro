@@ -6,9 +6,9 @@ POST http://localhost:3003/users/signup
 Content-Type: application/json
 
 {
-    "name": "alice",
-    "email": "alice@gmail.com",
-    "password": "alice99"
+"name": "mari", 
+"email": "mari@gmail.com", 
+"password": "mari999"
 }
 
 ### Login
@@ -16,8 +16,8 @@ POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-    "email": "astrodev@gmail.com",
-    "password": "bananinha"
+    "email": "mari@gmail.com", 
+    "password": "mari999"
 }
 
 ### Get products 

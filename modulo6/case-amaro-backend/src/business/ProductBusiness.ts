@@ -29,7 +29,7 @@ export class ProductBusiness {
             offset
         }
 
-        const productDB: IProductDB[] = await this.productDatabase.getProducts(getProductsInput)
+        const productDB: IProductDB[] = await this.productDatabase.getProducts(getProductsInput) as []
 
         const products = productDB.map(productDB => {
             return new Product(
@@ -56,52 +56,55 @@ export class ProductBusiness {
     }
 
     public searchProduct = async (search: string | undefined) => {
-        if(!search){
+        if (!search) {
             throw new RequestError(`Digite na pesquisa qual produto você deseja buscar`)
         }
 
         const productsDB = await this.productDatabase.searchProduct(search)
 
-        const products = productsDB.map(productDB => {
-            return new Product(
-                productDB.id,
-                productDB.name
-            )
-        })
+        if (productsDB != undefined) {
+            const products = productsDB?.map(productDB => {
+                return new Product(
+                    productDB.id,
+                    productDB.name
+                )
+            })
 
-        const response: IGetProductsSearchOutputDTO = {
-            message: "Aqui está o produto!",
-            products
+            const response: IGetProductsSearchOutputDTO = {
+                message: "Aqui está o produto!",
+                products
+            }
+
+            return response
         }
 
-        return response
     }
 
     public createProduct = async (input: ICreateProductInputDTO) => {
-        const {token, name, tags} = input
+        const { token, name, tags } = input
 
-        if(!token){
+        if (!token) {
             throw new UnauthorizedError("Token inválido ou ausente")
         }
 
         const payload = this.authenticator.getTokenPayload(token)
-        if(!payload){
+        if (!payload) {
             throw new UnauthorizedError("Não autenticado");
         }
 
-        if(typeof name !== "string"){
+        if (typeof name !== "string") {
             throw new RequestError("Parâmetro 'name' inválido: deve ser uma string")
         }
 
-        if(name.length < 3){
+        if (name.length < 3) {
             throw new RequestError("Parâmetro 'nome' inválido: deve ter pelo menos 3 letras")
         }
 
         const isExistsProduct = await this.productDatabase.searchProduct(name)
-        if(!isExistsProduct){
+        if (!isExistsProduct) {
             throw new ConflictError(`Esse produto já existe`)
         }
-	
+
         const productId = this.idGenerator.generate()
 
         const newProduct: ICreateProductDBTO = {
@@ -111,14 +114,14 @@ export class ProductBusiness {
 
         await this.productDatabase.createProduct(newProduct)
 
-        for (let tagId of tags){
+        for (let tagId of tags) {
             const inputTags: ITagsProductsDB = {
                 id: this.idGenerator.generate(),
                 product_id: productId,
                 tag_id: tagId
             }
 
-        await this.productDatabase.createTag(inputTags)
+            await this.productDatabase.createTag(inputTags)
         }
 
         const response = {

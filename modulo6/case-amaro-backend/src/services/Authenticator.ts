@@ -11,7 +11,7 @@ export class Authenticator {
     generateToken = (payload: ITokenPayload): string => {
         const token = jwt.sign(
             payload,
-            process.env.JWT_KEY,
+            process.env.JWT_KEY as string,
             {
                 expiresIn: process.env.JWT_EXPIRES_IN
             }
@@ -24,7 +24,7 @@ export class Authenticator {
         try {
             const payload = jwt.verify(
                 token,
-                process.env.JWT_KEY
+                process.env.JWT_KEY as string
             )
 
             return payload as ITokenPayload

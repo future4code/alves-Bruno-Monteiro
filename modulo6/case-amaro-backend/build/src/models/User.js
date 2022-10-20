@@ -25,9 +25,6 @@ class User {
         this.getPassword = () => {
             return this.password;
         };
-        this.getRole = () => {
-            return this.role;
-        };
         this.setId = (newId) => {
             this.id = newId;
         };
@@ -43,6 +40,9 @@ class User {
         this.setRole = (newRole) => {
             this.role = newRole;
         };
+    }
+    getRole() {
+        throw new Error("Method not implemented.");
     }
 }
 exports.User = User;
