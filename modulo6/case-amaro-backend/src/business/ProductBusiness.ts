@@ -2,7 +2,7 @@ import { ProductDatabase } from "../database/ProductDatabase";
 import { ConflictError } from "../errors/ConflictError";
 import { RequestError } from "../errors/RequestError";
 import { UnauthorizedError } from "../errors/UnauthorizedError";
-import { ICreateProductDBTO, ICreateProductInputDTO, IGetProductsDB, IGetProductsInputDBTO, IGetProductsOutput, IGetProductsSearchOutputDTO, IProductDB, ITagsProductsDB, Product } from "../models/Products";
+import { ICreateProductDBTO, ICreateProductInputDTO, IGetProductsDB, IGetProductsInputDBTO, IGetProductsOutput, IGetProductsSearchOutputDTO, IAddTagInputDTO, IProductDB, ITagsProductsDB, ITagsDB, Product } from "../models/Products";
 import { Authenticator } from "../services/Authenticator";
 import { IdGenerator } from "../services/IdGenerator";
 
@@ -81,7 +81,7 @@ export class ProductBusiness {
     }
 
     public createProduct = async (input: ICreateProductInputDTO) => {
-        const { token, name, tags } = input
+        const { token, id, name, tags } = input
 
         if (!token) {
             throw new UnauthorizedError("Token inválido ou ausente")
@@ -90,6 +90,10 @@ export class ProductBusiness {
         const payload = this.authenticator.getTokenPayload(token)
         if (!payload) {
             throw new UnauthorizedError("Não autenticado");
+        }
+
+        if (typeof id !== "string") {
+            throw new RequestError("Parâmetro 'id' inválido: deve ser uma string")
         }
 
         if (typeof name !== "string") {
@@ -105,23 +109,32 @@ export class ProductBusiness {
             throw new ConflictError(`Esse produto já existe`)
         }
 
-        const productId = this.idGenerator.generate()
-
         const newProduct: ICreateProductDBTO = {
-            id: productId,
+            id,
             name
         }
 
         await this.productDatabase.createProduct(newProduct)
 
-        for (let tagId of tags) {
-            const inputTags: ITagsProductsDB = {
-                id: this.idGenerator.generate(),
-                product_id: productId,
-                tag_id: tagId
+        for (let tag of tags) {
+            let tagResult = await this.productDatabase.searchTag(tag)
+            
+            if (tagResult != undefined) {
+                let inputTags: ITagsProductsDB = {
+                    id: this.idGenerator.generate(),
+                    product_id: newProduct.id,
+                    tag_id: tagResult.id
+                } 
+                await this.productDatabase.addTag(inputTags)
+            } else {
+                let inputTags: ITagsDB = { 
+                    id: this.idGenerator.generate(),
+                    tag
+                } 
+                await this.productDatabase.createTag(inputTags)
+
             }
 
-            await this.productDatabase.createTag(inputTags)
         }
 
         const response = {

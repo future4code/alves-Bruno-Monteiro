@@ -32,6 +32,7 @@ export class ProductController {
         try {
             const input = {
                 token: req.headers.authorization as string,
+                id: req.body.id,
                 name: req.body.name,
                 tags: req.body.tags
             }
@@ -42,7 +43,7 @@ export class ProductController {
             if (error instanceof BaseError) {
                 return res.status(error.statusCode).send({ message: error.message })
             }
-            res.status(500).send({ message: "Erro inesperado ao buscar produtos!" })
+            res.status(500).send({ message: "Erro inesperado ao criar produtos!" })
         }
     }
 

@@ -1,4 +1,4 @@
-import { ICreateTagInputDTO, IGetProductsDB, IProductDB, ITagsDB, Product } from "../models/Products";
+import { IAddTagInputDTO, ICreateTagInputDTO, IGetProductsDB, IProductDB, ITagDB, Product } from "../models/Products";
 import { BaseDatabase } from "./BaseDatabase";
 
 
@@ -52,12 +52,28 @@ export class ProductDatabase extends BaseDatabase {
             .insert({id, name})
     }
 
-    public createTag = async (input: ICreateTagInputDTO): Promise<void> => {
+    public addTag = async (input: IAddTagInputDTO): Promise<void> => {
         const {id, product_id, tag_id} = input
 
         await BaseDatabase
             .connection(ProductDatabase.Amaro_Tags_Products)
             .insert({id, product_id, tag_id})
+    }
+
+    public createTag = async (input: ICreateTagInputDTO): Promise<void> => {
+        const {id, tag} = input
+
+        await BaseDatabase
+            .connection(ProductDatabase.Amaro_Tags)
+            .insert({id, tag})
+    }
+
+    public searchTag = async (search: string): Promise <ITagDB[] | undefined> => {
+        const result: ITagDB[] = await BaseDatabase
+            .connection(ProductDatabase.Amaro_Products)
+            .select()
+            .where(`tag`, `LIKE`, `%${search}%`)
+        return result
     }
 
     public getProductById = async (id: string): Promise <IProductDB | undefined> => {

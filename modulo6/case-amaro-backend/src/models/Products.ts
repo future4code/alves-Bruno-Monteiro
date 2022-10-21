@@ -2,8 +2,7 @@ export interface IProductDB {
     id: string,
     name: string
 }
-
-export interface ITagsDB {
+export interface ITagDB {
     id: string,
     tag: string
 }
@@ -48,6 +47,7 @@ export class Product {
 
 export interface ICreateProductInputDTO {
     token: string,
+    id: string,
     name: string,
     tags: string[]
 }
@@ -57,10 +57,15 @@ export interface ICreateProductDBTO {
     name: string
 }
 
-export interface ICreateTagInputDTO {
+export interface IAddTagInputDTO {
     id: string,
     product_id: string,
     tag_id: string
+}
+
+export interface ICreateTagInputDTO {
+    id: string,
+    tag: string
 }
 
 export interface IGetProductsOutput {
