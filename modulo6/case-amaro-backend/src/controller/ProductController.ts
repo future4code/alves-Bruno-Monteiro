@@ -1,63 +1,59 @@
-import { ProductBusiness } from "../business/ProductBusiness";
-import { BaseError } from "../errors/BaseError";
 import { Request, Response } from "express";
-import { IGetProductsInputDBTO } from "../models/Products";
+import { Product, productsTable } from "../models/Products";
+import { GetProductsDTO, ProductDTO } from "../business/ProductBusiness";
+import productBusiness from "../business/ProductBusiness";
 
+class ProductController {
 
-export class ProductController {
-    constructor(
-        private productBusiness: ProductBusiness
-    ) {}
-
-    public getProducts = async (req: Request, res: Response) => {
-        try {
-            const input: IGetProductsInputDBTO = {
-                order: req.query.order as string,
-                sort: req.query.sort as string,
-                limit: req.query.limit as string,
-                page: req.query.page as string
-            }
-
-            const response = await this.productBusiness.getProducts(input)
-            res.status(200).send(response)
-        } catch (error: unknown) {
-            if (error instanceof BaseError) {
-                return res.status(error.statusCode).send({ message: error.message })
-            }
-            res.status(500).send({ message: "Erro inesperado ao adicionar produto!" })
+  async getProducts (req: Request, res: Response) {
+    try {
+        const input: GetProductsDTO = {
+            order: req.query.order as string,
+            sort: req.query.sort as string,
+            limit: req.query.limit as string,
         }
-    }
 
-    public createProduct = async (req: Request, res: Response) => {
-        try {
-            const input = {
-                token: req.headers.authorization as string,
-                id: req.body.id,
-                name: req.body.name,
-                tags: req.body.tags
-            }
-
-            const response = await this.productBusiness.createProduct(input)
-            res.status(201).send(response)
-        } catch (error: unknown) {
-            if (error instanceof BaseError) {
-                return res.status(error.statusCode).send({ message: error.message })
-            }
-            res.status(500).send({ message: "Erro inesperado ao criar produtos!" })
-        }
-    }
-
-    public searchProduct = async (req: Request, res: Response) => {
-        try {
-            const search = req.query.search as string
-
-            const response = await this.productBusiness.searchProduct(search)
-            res.status(201).send(response)
-        } catch (error: unknown) {
-            if (error instanceof BaseError) {
-                return res.status(error.statusCode).send({ message: error.message })
-            }
-            res.status(500).send({ message: "Erro inesperado ao buscar produtos!" })
-        }
+        const response = await productBusiness.getProducts(input)
+        res.status(200).send(response)
+    } catch (error:any) {
+      res.status(400).send(error.message);
     }
 }
+  async create(req: Request, res: Response) {
+    try {
+      // Monta o DTO
+      const productDTO: ProductDTO = {
+        name: req.body.name,
+        tags: req.body.tags,
+      };
+
+      // Valida o DTO
+      if (!productDTO.name || !productDTO.tags) {
+        throw new Error("Algum parâmetro faltando");
+      }
+
+      // Invoca o caso de uso
+      const output = await productBusiness.create(productDTO);
+      res.status(200).send(output);
+    } catch (error:any) {
+      res.status(400).send(error.message);
+    }
+  }
+
+  async search(req: Request, res: Response) {
+    try {
+      
+      const input: Product = {
+        id:  req.params.id,
+        name:  req.params.name,
+        tags:  req.params.tags,
+      };
+      const output = await productBusiness.search(input);
+      console.log(output)
+      res.status(200).send(output);
+    } catch (error:any) {
+      res.status(400).send(error.message);
+    }
+  }
+}
+export default new ProductController();

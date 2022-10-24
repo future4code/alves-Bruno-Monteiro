@@ -1,4 +1,4 @@
-import { UserDatabase } from "../database/UserDatabase"
+import { UserDatabase } from "../data/UserDatabase"
 import { ConflictError } from "../errors/ConflictError"
 import { NotFoundError } from "../errors/NotFoundError"
 import { RequestError } from "../errors/RequestError"
