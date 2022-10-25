@@ -6,16 +6,6 @@ export class ProductDatabase extends BaseDatabase {
     public static TABLE_TAGS = "Amaro_Tags"
     public static TABLE_TAGS_PRODUCTS = "Amaro_Tags_Products"
 
-    // public toProductDBModel = (product: Product): IProductDB => {
-    //     const productDB: IProductDB = {
-    //         id: product.getId(),
-    //         name: product.getName(),
-
-    //     }
-
-    //     return productDB
-    // }
-
     public getProducts = async (): Promise<IProductDB[] | undefined> => {
 
         const result: IProductDB[] = await BaseDatabase
@@ -26,7 +16,7 @@ export class ProductDatabase extends BaseDatabase {
     }
 
     public createProduct = async (product: IProductDB): Promise<void> => {
-        // const productDB = this.toProductDBModel(product)
+      
 
         await BaseDatabase
             .connection(ProductDatabase.TABLE_PRODUCTS)
@@ -35,7 +25,7 @@ export class ProductDatabase extends BaseDatabase {
     }
 
     public createTag = async (tag: ITagDB): Promise<void> => {
-        // const productDB = this.toProductDBModel(product)
+    
 
         await BaseDatabase
             .connection(ProductDatabase.TABLE_TAGS)
@@ -44,7 +34,7 @@ export class ProductDatabase extends BaseDatabase {
     }
 
     public createProductTag = async (productTag: IProductTagDB): Promise<void> => {
-        // const productDB = this.toProductDBModel(product)
+
 
         await BaseDatabase
             .connection(ProductDatabase.TABLE_TAGS_PRODUCTS)
@@ -53,7 +43,7 @@ export class ProductDatabase extends BaseDatabase {
     }
 
     public findTagByName = async (tag: string): Promise<any[]> => {
-        // const productDB = this.toProductDBModel(product)
+
 
         const id = await BaseDatabase
             .connection(ProductDatabase.TABLE_TAGS)

@@ -1,18 +1,22 @@
-import { UserBusiness } from "../../src/business/UserBusiness"
+import { response } from "express"
+import { ProductBusiness } from "../../src/business/ProductBusiness"
 import { BaseError } from "../../src/errors/BaseError"
-import { ILoginInputDTO, ISignupInputDTO } from "../../src/models/User"
-import { AuthenticatorMock } from ".././mocks/AuthenticatorMock"
-import { HashManagerMock } from ".././mocks/HashManagerMock"
-import { IdGeneratorMock } from ".././mocks/IdGeneratorMock"
-import { UserDatabaseMock } from ".././mocks/UserDatabaseMock"
+import { HashManagerMock } from "../mocks/HashManagerMock"
+import { IdGeneratorMock } from "../mocks/IdGeneratorMock"
+import { ProductDatabaseMock } from "../mocks/ProductDatabaseMock"
 
 describe("Testando o método login da UserBusiness", () => {
-    const userBusiness = new UserBusiness(
-        new UserDatabaseMock(),
+    const productBusiness = new ProductBusiness(
+        new ProductDatabaseMock(),
         new IdGeneratorMock(),
         new HashManagerMock(),
-        new AuthenticatorMock()
     )
+
+    test("Um token é retornado quando o login é bem-sucedido", async () => {
+        const response = await productBusiness.getProducts()
+        expect(response.message).toBe("Login realizado com sucesso")
+        expect(response.token).toBe("token-mock-admin")
+    })
 
     test("Um token é retornado quando o login é bem-sucedido", async () => {
         const input: ILoginInputDTO = {

@@ -1,5 +1,4 @@
 import { BaseDatabase } from "../BaseDatabase"
-import { UserDatabase } from "../UserDatabase"
 import { users } from "./data"
 
 class Migrations extends BaseDatabase {
@@ -28,22 +27,12 @@ class Migrations extends BaseDatabase {
 
     createTables = async () => {
         await BaseDatabase.connection.raw(`
-        DROP TABLE IF EXISTS ${UserDatabase.TABLE_USERS};
-        
-        CREATE TABLE IF NOT EXISTS ${UserDatabase.TABLE_USERS}(
-            id VARCHAR(255) PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-            email VARCHAR(255) NOT NULL UNIQUE,
-            password VARCHAR(255) NOT NULL,
-            role ENUM("NORMAL", "ADMIN") DEFAULT "NORMAL" NOT NULL
-        );
         `)
     }
 
     insertData = async () => {
         await BaseDatabase
-            .connection(UserDatabase.TABLE_USERS)
-            .insert(users)
+
     }
 }
 

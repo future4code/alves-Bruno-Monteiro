@@ -6,7 +6,7 @@ import { ICreateProductInputDTO } from "../models/Product";
 export class ProductController {
     constructor(
         private productBusiness: ProductBusiness
-    ) {}
+    ) { }
 
     public createProduct = async (req: Request, res: Response) => {
         try {
@@ -31,7 +31,7 @@ export class ProductController {
         try {
             const response = await this.productBusiness.getProducts()
             res.status(200).send(response)
-        } catch (error) { 
+        } catch (error) {
             console.log(error)
             if (error instanceof BaseError) {
                 return res.status(error.statusCode).send({ message: error.message })
@@ -45,7 +45,7 @@ export class ProductController {
             const search = req.query.key as string
             const response = await this.productBusiness.searchProducts(search)
             res.status(200).send(response)
-        } catch (error) { 
+        } catch (error) {
             console.log(error)
             if (error instanceof BaseError) {
                 return res.status(error.statusCode).send({ message: error.message })
