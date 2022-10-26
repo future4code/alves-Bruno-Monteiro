@@ -1,3 +1,4 @@
+import { ProductBusiness } from "../business/ProductBusiness"
 
 export interface IProductDB {
     id: string,
