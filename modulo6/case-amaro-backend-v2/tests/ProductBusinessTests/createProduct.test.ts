@@ -1,4 +1,5 @@
 import { ProductBusiness } from "../../src/business/ProductBusiness"
+import { BaseError } from "../../src/errors/BaseError"
 import { ICreateProductInputDTO } from "../../src/models/Product"
 import { HashManagerMock } from "../mocks/HashManagerMock"
 import { IdGeneratorMock } from "../mocks/IdGeneratorMock"
@@ -19,10 +20,10 @@ describe("Testando o método do ProductBusiness", () => {
     // O segundo argumento é um callback que pode ser assincrono
     // expect() é a assertiva, uma afirmacao que o Jest ira avaliar
     test("createProduct bem sucedido", async () => {
-        const input: ICreateProductInputDTO = {
-            id: `8314`,
-            name: `VESTIDO PLISSADO ACINTURADO`,
-            tags: [`casual", "viagem", "delicado`]
+        let input: ICreateProductInputDTO = {
+            id: "8314",
+            name: "VESTIDO PLISSADO ACINTURADO",
+            tags: ["casual", "viagem", "delicado"]
         }
         const response = await productBusiness.createProduct(input)
         expect(response.message).toEqual(`Produto criado com sucesso!`)
@@ -31,78 +32,91 @@ describe("Testando o método do ProductBusiness", () => {
 
     test("Retorna um erro caso o produto nao esteja cadastrado", async () => {
         try {
-            const input: ICreateProductInputDTO = {
-                id: `8314`,
-                name: `VESTIDO PLISSADO ACINTURADO`,
-                tags: [`casual", "viagem", "delicado`]
+            let input: ICreateProductInputDTO = {
+                id: "8314",
+                name: "VESTIDO PLISSADO ACINTURADO",
+                tags: ["casual", "viagem", "delicado"]
             }
             await productBusiness.createProduct(input)
-        } catch (error) {
-            expect(error.statusCode).toEqual(401)
-            expect(error.message).toEqual(`Nao autenticado`)
+        } catch (error: unknown) {
+            if (error instanceof BaseError) {
+                expect(error.statusCode).toEqual(409)
+                expect(error.message).toEqual(`Nao autenticado`)
+
+            }
         }
 
     })
 
 
-        test("Retorna um erro caso o produto nao esteja cadastrado", async () => {
-            try {
-                const input: ICreateProductInputDTO = {
-                    id: ``,
-                    name: `VESTIDO PLISSADO ACINTURADO`,
-                    tags: [`casual", "viagem", "delicado`]
-                }
-                await productBusiness.createProduct(input)
-            } catch (error) {
-                expect(error.statusCode).toEqual(401)
-                expect(error.message).toEqual(`Id ausente ou invalida`)
+    test("Retorna um erro caso o produto nao esteja cadastrado", async () => {
+        try {
+            let input: ICreateProductInputDTO = {
+                id: "",
+                name: "VESTIDO PLISSADO ACINTURADO",
+                tags: ["casual", "viagem", "delicado"]
             }
+            await productBusiness.createProduct(input)
+        } catch (error: unknown) {
+            if (error instanceof BaseError) {
+                expect(error.statusCode).toEqual(409)
+                expect(error.message).toEqual(`Produto já cadastrado`)
 
-        })
+            }
+        }
 
-            test("Retorna um erro caso o produto ja exista", async () => {
-                try {
-                    const input: ICreateProductInputDTO = {
-                        id: `8314`,
-                        name: `VESTIDO PLISSADO ACINTURADO`,
-                        tags: [`casual", "viagem", "delicado`]
-                    }
-                    await productBusiness.createProduct(input)
-                } catch (error) {
-                    expect(error.statusCode).toEqual(409)
-                    expect(error.message).toEqual(`O produto ja existe no cadastro`)
-                }
-            })
+    })
+
+    test("Retorna um erro caso o produto ja exista", async () => {
+        try {
+            let input: ICreateProductInputDTO = {
+                id: "8314",
+                name: "VESTIDO PLISSADO ACINTURADO",
+                tags: ["casual", "viagem", "delicado"]
+            }
+            await productBusiness.createProduct(input)
+        } catch (error: unknown) {
+            if (error instanceof BaseError) {
+                expect(error.statusCode).toEqual(409)
+                expect(error.message).toEqual(`Produto já cadastrado`)
+
+            }
+        }
+    })
 
 
-                test("Retorna um erro caso o name nao seja uma string", async () => {
-                    try {
-                        const input = {
-                            id: `8314`,
-                            name: 12345,
-                            tags: [`casual", "viagem", "delicado`]
-                        } as unknown as ICreateProductInputDTO
+    test("Retorna um erro caso o name nao seja uma string", async () => {
+        try {
+            const input = {
+                id: `8314`,
+                name: 12345,
+                tags: [`casual", "viagem", "delicado`]
+            } as unknown as ICreateProductInputDTO
 
-                        await productBusiness.createProduct(input)
-                    } catch (error) {
-                        expect(error.statusCode).toEqual(400)
-                        expect(error.message).toEqual(`Parâmetro 'name' inválido: deve ser uma string`)
-                    }
-                })
+            await productBusiness.createProduct(input)
+        } catch (error: unknown) {
+            if (error instanceof BaseError) {
+                expect(error.statusCode).toEqual(400)
+                expect(error.message).toEqual(`Parâmetro 'name' inválido: deve ser uma string`)
+            }
+        }
+    })
 
-                    test("Retorna erro caso o name tenha menos que 3 caracteres", async () => {
-                        try {
-                            const input = {
-                                id: `8314`,
-                                name: "Br",
-                                tags: [`casual", "viagem", "delicado`]
-                            } as unknown as ICreateProductInputDTO
+    test("Retorna erro caso o name tenha menos que 3 caracteres", async () => {
+        try {
+            const input = {
+                id: `8314`,
+                name: "Br",
+                tags: [`casual", "viagem", "delicado`]
+            } as unknown as ICreateProductInputDTO
 
-                            await productBusiness.createProduct(input)
-                        } catch (error) {
-                            expect(error.statusCode).toEqual(400)
-                            expect(error.message).toEqual(`Parâmetro 'name' inválido: Deve conter ao menos 3 letras`)
-                        }
+            await productBusiness.createProduct(input)
+        } catch (error: unknown) {
+            if (error instanceof BaseError) {
+                expect(error.statusCode).toEqual(400)
+                expect(error.message).toEqual(`Parâmetro 'name' inválido: mínimo de 3 caracteres`)
+            }
+        }
 
-                    })
-                })
+    })
+})

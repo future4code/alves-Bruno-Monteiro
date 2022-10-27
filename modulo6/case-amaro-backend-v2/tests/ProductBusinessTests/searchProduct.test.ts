@@ -87,7 +87,7 @@ test("Retorna um erro caso o campo de busca estiver vazio", async () => {
     try {
         const searchProduct = ""
         await productBusiness.searchProducts(searchProduct)
-    } catch (error:unknown) {
+    } catch (error) {
         if (error instanceof BaseError){
 
             expect(error.statusCode).toEqual(400)

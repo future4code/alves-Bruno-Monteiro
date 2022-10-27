@@ -16,7 +16,11 @@ export interface IProductTagDB {
     tag_id: string
 }
 
-
+export interface ICreateProductInputDTO {
+    id: string,
+    name: string,
+    tags: string[]
+}
 
 export class Product {
     constructor(
@@ -50,10 +54,4 @@ export class Product {
         this.tags = newTags
     }
 
-}
-
-export interface ICreateProductInputDTO {
-    id: string,
-    name: string,
-    tags: string[]
 }

@@ -12,11 +12,6 @@ describe("Testando o método do ProductBusiness", () => {
     )
 
     test("getProducts bem sucedido", async () => {
-        const input: IProductDB = {
-            id: `8314`,
-            name: `VESTIDO PLISSADO ACINTURADO`,
-         
-        }
         const response = await productBusiness.getProducts()
         // O matcher .toEqual() lida com valores não-primitivos Arrays e objetos
         expect(response).toEqual([
