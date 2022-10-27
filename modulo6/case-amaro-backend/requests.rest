@@ -1,0 +1,40 @@
+### Ping
+GET http://localhost:3003/ping
+
+### Signup
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+"name": "bruno", 
+"email": "bruno@gmail.com", 
+"password": "bruno123"
+}
+
+### Login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+"email": "bruno@gmail.com", 
+"password": "bruno123"
+}
+
+### Get products 
+GET http://localhost:3003/products?order=name&sort=asc
+
+
+### Search products 
+GET http://localhost:3003/products/search/tricot
+
+
+### Create products 
+POST http://localhost:3003/products
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFiNTYwMTI5LWQ0NDQtNDc4My04MDI4LTFiYzRhNmE1Mzk4NCIsImlhdCI6MTY2NjM4ODMzMSwiZXhwIjoxNjY2NDc0NzMxfQ.nclJz2tA_yOt3kP8vT4QiiK1qqNMct0n0FPbKs1XX9Y
+
+
+ {
+    "id": "4444",
+    "name": "VESTIDO TRICOT JEANS"
+}
